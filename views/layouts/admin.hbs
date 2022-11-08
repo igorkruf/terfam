@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>{{title}}</title>
+		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+       <link rel="stylesheet" type="text/css" href="/style/style.css"/>
+	   {{!-- для форматирования даты --}}
+	   <script src="/scripts/luxon.min.js"></script>
+      
+	   <script src="/tinymce/tinymce.min.js"></script>
+	   {{!-- для datepicker --}}
+	   {{!-- <link rel="stylesheet" type="text/css" href="/datepicker/datepicker.min.css"/> --}}
+       {{!-- <script src="/datepicker/datepicker.min.js"></script> --}}
+	    <script src="/scripts/adminscript.js"></script>
+	   <script>
+		//TinyMCE добавление новости
+      tinymce.init({
+        selector: '#mytextarea',
+		forced_root_block : 'false',
+		force_br_newlines : true,
+    force_p_newlines : false,
+		language: 'ru',
+		menubar: false,
+		 plugins: ['lists','code', 'link'],
+  toolbar: '   italic bold | link | code |  ',
+  
+     	  } );
+	//TinyMCE добавление услуги
+	tinymce.init({
+      selector: '#textareaaboutservice',
+	language: 'ru',
+	menubar: false,
+	 plugins: ['lists','code', 'link', 'image'],
+	toolbar1:'undo redo | forecolor backcolor| fontsize bold italic underline hr|  |copy cut paste pastetext| ',
+toolbar2:'numlist bullist | aligncenter alignjustify alignleft alignnone alignright |  link code '
+     	  } );
+		 
+    </script>
+	
+	</head>
+	<body class="bodyadmin grid">
+		
+		<main class="mainadmin grid">
+			{{{body}}}
+		</main>
+		<section class="tooltip">
+			Подсказка
+		</section>
+		
+		{{!-- Модальное окно --}}
+		<section class="wrapmodal grid">
+<section class="modal grid">
+	<span id="closeeditnews" class="modal__close"></span>
+	<div class="modal_content"></div>
+	{{!-- <input type="hidden" class="idnews"/>	
+	<textarea id="mytextarea" class="textnews" cols="30" rows="10"></textarea>
+<div class="form__btn form__btn-savenews">Сохранить изменения</div> --}}
+	
+	</section>
+	</section>
+		
+	</body>
+</html>

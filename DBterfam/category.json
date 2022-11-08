@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "634914d6dd1d3dd1a3a98e68"
+  },
+  "nameCategory": "Малышам",
+  "ageCategory": "0-3 лет"
+},{
+  "_id": {
+    "$oid": "634914f0dd1d3dd1a3a98e6b"
+  },
+  "nameCategory": "Дошколятам",
+  "ageCategory": "3-6 лет"
+}]

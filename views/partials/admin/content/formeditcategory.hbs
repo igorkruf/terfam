@@ -1,0 +1,11 @@
+<section data-formeditcategory>
+<h1>Форма редактирования категории</h1>
+<section class="form grid">
+ <input type="hidden" class="id_category"  value="{{selectedCategory._id}}">   
+<input type="text" class="form__input name_category" placeholder="Например: 'Малышам' (обязательно)"  value="{{selectedCategory.nameCategory}}" >
+ <input type="text" class="form__input age_category"  placeholder="Например  '0-3 лет'" value="{{selectedCategory.ageCategory}}" >
+ {{!-- <input type="file" class="afishanew"  > --}}
+<div class="form__btn form__btn-editcategory"> Сохранить изменения</div>
+</section>
+
+</section>

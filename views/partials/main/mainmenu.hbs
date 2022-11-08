@@ -1,0 +1,11 @@
+<div class="nav grid">
+<div class="nav__close grid" ><div class="nav__closebtn"><img src="/img/closewhite.png" ></div></div>
+<nav class="menu grid">
+    <div class="menu__item " data-razdel="home"><a href="/"><span class="menu__item-href">Главная</span></a></div>
+    <div class="menu__item " data-razdel="news"><a href="/news"><span class="menu__item-href">Объявления</span></a></div>
+    {{#each listCategory}}
+    <div class="menu__item" data-razdel="services"><span class="menu__item-innerhtml" data-idcategory="{{_id}}">{{nameCategory}}</span></div>
+    {{/each}}
+    {{!-- <div class="menu__item" data-razdel="aboutus"><span class="menu__item-conteiner">О нас</span></div> --}}
+</nav>
+</div>

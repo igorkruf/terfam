@@ -1,0 +1,26 @@
+<section data-listnewsfetch>
+     <div class="width100 grid">
+ <div class="content grid"> 
+    <section class="listnews grid">
+    {{!-- <div>
+ <h1>Наши новости</h1>--}}
+    
+    {{#each listNews}}
+    <div class="listnewsfetch__item grid">
+{{!-- <div class="listnews-item__wrapimg"> --}}
+   <img class="listnewsfetch__item-img" src="/uploads/img/news/{{this._id}}.jpg">
+{{!-- </div> --}}
+    <div class="listnewsfetch__item-text">{{{this.textNew}}}</div>
+    </div>
+    {{/each}}
+   </section>
+   </div>
+{{!-- <img class="aboutservice__poster" src="/uploads/img/services/{{idService}}.jpg" >
+<div class="aboutservice__name" style="background-color: {{selectedservice.colorService}};">{{toUpperCase selectedservice.nameService}}</div>
+<div class="aboutservice__about">{{{selectedservice.aboutService}}}</div>
+{{>main/galleryservice}} 
+</div>--}}
+</div>
+</div>
+   
+</section>

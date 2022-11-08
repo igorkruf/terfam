@@ -1,0 +1,64 @@
+$clr:#447de6;
+$clrheadermenu: #a63680;
+$verydark: #363e5a;
+$normal:#4e5769;
+$light:#828b9d;
+$verylight:#d5d8d3;
+
+$clrService2:#4f6c7c;
+@font-face {
+    font-family: 'Marmelad';
+    src: url('fonts/woff/Marmelad-Regular.woff');
+         
+  }
+  @font-face {
+    font-family: 'Neucha';
+    src: url('fonts/woff/Neucha-Regular.woff');
+    
+  }
+  @font-face {
+    font-family: 'Roboto-Thin';
+    src: url('fonts/woff/Roboto-Thin.woff');
+    
+  }
+  @font-face {
+    font-family: 'Roboto-ThinItalic';
+    src: url('fonts/woff/Roboto-ThinItalic.woff');
+    
+  }
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('fonts/woff/Roboto-Regular.woff');
+     }
+  @font-face {
+    font-family: 'Roboto-RegularItalic';
+    src: url('fonts/woff/Roboto-Italic.woff');
+     
+  }
+
+
+  .grid {
+    display: grid;
+  }
+  @mixin br($rad) {
+    -webkit-border-radius: $rad;
+    -moz-border-radius: $rad;
+    -ms-border-radius: $rad;
+    border-radius: $rad;
+  }
+   //Отмена выделения при двойном клике
+   @mixin ns(){
+    -webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none; 
+  }
+  //тень блока
+  @mixin box-shadow($x-axis: 0px, $y-axis: 0px, $blur: 10px, $color: #00000081) {
+    box-shadow: $x-axis $y-axis $blur $color;
+  }
+  //тень во внутрь
+  @mixin box-shadowinset($x-axis: 0px, $y-axis: 0px, $blur: 10px, $color: #000 inset) {
+    box-shadow: $x-axis $y-axis $blur $color;
+  }

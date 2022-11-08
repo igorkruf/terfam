@@ -1,0 +1,26 @@
+<section class="listCategory">
+<h1>Форма добавления возрастной категории</h1>
+{{>admin/content/formaddcategory}}
+<h1>Список категорий</h1>
+<section class="listcategory grid">
+{{#each listCategory}}
+<section class="list__item grid">
+    <nav class="list__item-menu grid">
+        <div></div>
+        <div class="edit edit-category"><input type="hidden" class="idcategory" value={{_id}}> </div>
+        <div class="del">
+             
+            <div class="del__confirm grid">
+              <span class="del__confirm-text" >Уверен?</span>
+               <div class="del__confirm-btns grid"><span class="del__confirm-btn delcategory">Да<input type="hidden" class="idcategory" value={{_id}}></span><span class="del__confirm-btn nodelcategory">Нет</span></div> 
+            </div>
+            <input type="hidden" class="idnews" value={{_id}}>
+        </div>
+    </nav>
+
+    <div class="list__item-text">{{nameCategory}}</div>
+   <div class="list__item-text">{{ageCategory}}</div>
+    </section>
+{{/each}}
+</section> 
+</section>
