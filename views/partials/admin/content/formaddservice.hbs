@@ -17,6 +17,14 @@
 </div>
 </div>
 <div class="adv_service grid">
+<div>Тарифы:</div>
+<div class="form__input ">            
+{{#each listTariffes}}
+<input type="checkbox"  class="tariff_service" value={{_id}} />{{nameTariff}} {{priceTariff}}/{{lessonsTariff}}<br>
+{{/each}}
+</div>
+</div>
+<div class="adv_service grid">
     <div>Цвет услуги:</div>
 <input type="color"  class="form__input color_service"
            value="#64fd49">

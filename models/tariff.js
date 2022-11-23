@@ -3,31 +3,26 @@ const Schema = mongoose.Schema;
 // установка схемы
 const newSchema = new Schema(
   {
-    nameService: {
+    nameTariff: {
       type: String,
       required: true,
     },
-    aboutService: {
-      type: String,
-      required: true,
+    priceTariff: {
+      type: Number,
+      require: true,
     },
-    categoryService: {
-      type: Array,
-    },
-    colorService: {
-      type: String,
-    },
-    tariffesService: {
-      type: Array,
+    lessonsTariff: {
+      type: Number,
+      default: 1,
     },
   },
 
   {
-    collection: "services",
+    collection: "tariffes",
     versionKey: false,
   }
 );
 //userSchema.index({ userLogin: 1, userPassword: 1 }, { unique: true });
 //Создаём модели
-const Service = mongoose.model("Service", newSchema);
-export default Service;
+const Tariff = mongoose.model("Tariff", newSchema);
+export default Tariff;

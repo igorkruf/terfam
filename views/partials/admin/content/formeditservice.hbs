@@ -21,6 +21,16 @@
 </div>
 </div>
 <div class="adv_service grid">
+<div>Тарифы:</div>
+<div class="form__input ">    
+    <input type="hidden" class="selectedTariff" value={{selectedService.tariffesService}}>        
+{{#each listTariffes}}
+
+<input type="checkbox"  class="tariff_service" data-tariff-service value={{_id}} />{{nameTariff}} {{priceTariff}}/{{lessonsTariff}}<br>
+{{/each}}
+</div>
+</div>
+<div class="adv_service grid">
     <div>Цвет услуги:</div>
 <input type="color"  class="form__input color_service" data-color-service
            value="{{selectedService.colorService}}">

@@ -446,3 +446,7 @@ grid-row-gap: 20px;
  [data-btn-save-service]{
     @include ns();
  }
+ .list__item-about{
+    // border:1px solid red;
+    grid-template-columns: 1fr 25% 25%;
+ }

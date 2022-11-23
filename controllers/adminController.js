@@ -11,6 +11,7 @@ import __dirname from "../__dirname.js";
 import News from "../models/new.js";
 import Category from "../models/category.js";
 import Service from "../models/service.js";
+import Tariff from "../models/tariff.js";
 import Helpers from "../_helpers.js";
 
 import sharp from "sharp"; //для работы над файлами изображений
@@ -337,20 +338,23 @@ export default {
 
     let listServices = await Service.find({}).lean();
     console.log("ddddddddddddddddddddddddddddddddddddddddd");
-    listServices.forEach((elem) => {
-      //проверяем массив с категориями каждого сервиса и удаляем из него id удаленной категории
-      console.log(`elem: ${elem.categoryService}`);
-      let newCategoryService = elem.categoryService.filter((el) => {
+    //проверяем массив с возрастными категориями каждого сервиса и удаляем из него id удаленной категории
+    for (let i = 0; i < listServices.length; i++) {
+      let newCategoryService = listServices[i].categoryService.filter((el) => {
         if (el != req.params.id) {
           return true;
         } else {
           return false;
         }
       });
-      console.log(`newCategoryService: ${newCategoryService}`);
-      elem.categoryService = newCategoryService;
-    });
-
+      await Service.updateOne(
+        { _id: listServices[i]._id.toString() },
+        {
+          categoryService: newCategoryService,
+        }
+      );
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////
     Category.deleteOne({ _id: req.params.id }, function (err, result) {
       if (err) return console.log(err);
       console.log(result);
@@ -358,15 +362,17 @@ export default {
         res.json({ del: "Ok" });
       }
     });
-
-    //Список услуг
   },
   //Услуги
   formAddService: async (req, res) => {
     let listCategory = await Category.find({}).lean();
+    let listTariffes = await Tariff.find({})
+      .sort([["priceTariff", "1"]])
+      .lean();
     res.render("admin", {
       title: "Добавление услуги",
       listCategory: listCategory,
+      listTariffes: listTariffes,
       formAddService: true,
       helpers: {
         // getTimeRegistrationFromId: Helpers.getTimeRegistrationFromId,
@@ -382,6 +388,7 @@ export default {
       nameService: req.body.nameService,
       aboutService: req.body.aboutService,
       categoryService: req.body.categoryService,
+      tariffesService: req.body.tariffesService,
       colorService: req.body.colorService,
     });
     addService.save(function (err) {
@@ -446,6 +453,9 @@ export default {
     );
     //let listCategory = await Category.find({}).sort({ _id: -1 }).lean();
     let listCategory = await Category.find({}).lean();
+    let listTariffes = await Tariff.find({})
+      .sort([["priceTariff", "1"]])
+      .lean();
     let selectedService = await Service.findById(req.body.idService).lean();
     let posterSelectedService;
     //Если загружали постер сервиса
@@ -461,6 +471,7 @@ export default {
     console.log(selectedService);
     res.render("fetchpartial", {
       listCategory: listCategory,
+      listTariffes: listTariffes,
       selectedService: selectedService,
       posterSelectedService: posterSelectedService,
       getFormEditService: true,
@@ -500,6 +511,7 @@ export default {
           nameService: req.body.nameService,
           aboutService: req.body.aboutService,
           categoryService: req.body.categoryService,
+          tariffesService: req.body.tariffesService,
           colorService: req.body.colorService,
         }
       );
@@ -632,6 +644,127 @@ export default {
       res.json({ status: "ok" });
     } catch {
       console.log("нет этого в галерее");
+    }
+  },
+  /////////////////////////////////////////////
+  getListTariffes: async (req, res) => {
+    console.log("список тарифов");
+    let listTariffes = await Tariff.find({})
+      .sort([["priceTariff", "1"]])
+      .lean();
+    console.log(listTariffes);
+    res.render("admin", {
+      title: "Список тарифов",
+      getListTariff: true,
+      listTariffes: listTariffes,
+      helpers: {
+        //getSrcPosterService: Helpers.getSrcPosterService,
+      },
+      layout: "admin",
+    });
+  },
+  addTariff: async (req, res) => {
+    console.log("добавление тарифа");
+    let nameTariff = req.body.nameTariff;
+    let priceTariff = Number(req.body.priceTariff);
+    let lessonsTariff = Number(req.body.lessonsTariff);
+    let addTariff = new Tariff({
+      nameTariff: nameTariff,
+      priceTariff: priceTariff,
+      lessonsTariff: lessonsTariff,
+    });
+
+    addTariff.save(function (err, newTariff) {
+      if (err) {
+        console.log(err);
+        res.json({
+          itog: "0",
+          massege: "Ошибка при добавлении тарифа",
+        });
+      } else {
+        console.log(newTariff);
+        // res.status(200).json({
+        //   massege: "Тариф добавлен",
+        // });
+        res.json({
+          itog: "1",
+          massege: "Тариф добавлен",
+        });
+      }
+    });
+  },
+  delTariff: async (req, res) => {
+    // console.log(`Удаляем тариф: ${req.params.id}`);
+    Tariff.deleteOne({ _id: req.params.id }, async function (err, result) {
+      if (err) return console.log(err);
+      console.log(result);
+      if (result.deletedCount != 0) {
+        //Удаляем id удалённого тарифа из массива тарифов каждого сервиса
+        let listServices = await Service.find({}).lean();
+        console.log("ddddddddddddddddddddddddddddddddddddddddd");
+        console.log(listServices);
+
+        //проверяем массив с тарифами каждого сервиса и удаляем из него id удаленного тарифа
+        for (let i = 0; i < listServices.length; i++) {
+          let newTariffesService = listServices[i].tariffesService.filter(
+            (el) => {
+              if (el != req.params.id) {
+                return true;
+              } else {
+                return false;
+              }
+            }
+          );
+          await Service.updateOne(
+            { _id: listServices[i]._id.toString() },
+            {
+              tariffesService: newTariffesService,
+            }
+          );
+        }
+
+        res.json({ del: "Ok" });
+      }
+    });
+  },
+  getFormEditTariff: async (req, res) => {
+    console.log("редактируем тариф");
+    console.log(req.params.id);
+    let tariff = await Tariff.findById(req.params.id).lean();
+    console.log(tariff);
+    ///////////////////////////////////////////////////////
+    res.render("fetchpartial", {
+      title: "Редактирование тарифа",
+      getFormEditTariff: true,
+      tariff: tariff,
+      getFormEditTariff: true,
+      // helpers: {
+
+      //   getWeekDay: Helpers.getWeekDay,
+      // },
+      layout: "fetch",
+    });
+    ////////////////////////////////////////////////
+  },
+  saveChangesTariff: async (req, res) => {
+    console.log("sohranyaem tariff");
+    console.log(req.body);
+    let idTariff = req.body.editIdTariff;
+    let nameTariff = req.body.editNameTariff;
+    let priceTariff = Number(req.body.editPriceTariff);
+    let lessonsTariff = Number(req.body.editLessonsTariff);
+    let result = await Tariff.updateOne(
+      { _id: idTariff },
+      {
+        nameTariff: nameTariff,
+        priceTariff: priceTariff,
+        lessonsTariff: lessonsTariff,
+      }
+    );
+
+    console.log(result);
+    if (result.modifiedCount > 0) {
+      res.json({ itog: "Ok" });
     }
   },
   ///////////////////

@@ -1,0 +1,11 @@
+<section data-formedittariff>
+    <h1>Изменение тарифа</h1>
+<section class="form grid">
+     <input type="hidden" class="id_tariff"  value="{{tariff._id}}">  
+<input type="text" class="form__input edit-tariff-name" placeholder="Название тарифа (обязательно)" value="{{tariff.nameTariff}}"/>
+ <input type="text" class="form__input edit-tariff-price" placeholder="Стоимость например: 1000 (обязательно)" value="{{tariff.priceTariff}}"/>
+ <input type="text" class="form__input edit-tariff-lessons" placeholder="Колличество занятий в месяц например: 16 (по умолчанию 1)" value="{{tariff.lessonsTariff}}"/>
+ {{!-- <input type="file" class="afishanew"  > --}}
+<div class="form__btn form__btn-edittariff">Принять изменения </div>
+</section>
+</section>

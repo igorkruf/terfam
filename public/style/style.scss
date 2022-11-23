@@ -173,12 +173,19 @@ margin-left: 10px;
   @include br(5px);
 
 }//Убираем обвотку вокруг 
+.form{
+  margin-bottom: 20px;
+}
 .form__input{
   @include br(5px);
   // border:1px solid $verydark;
 }
+.form__input_error{
+   border:1px solid red;
+}
 a{text-decoration: none}
 .form__btn{
+  @include ns();
   @include br(5px);
   // background-color: $verydark;
   color:#fff;

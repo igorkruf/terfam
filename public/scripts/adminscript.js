@@ -1,16 +1,28 @@
 console.log("подключили скрипты Админпанели");
 //Определяем новый промис (возвращает массив выбранных возрастных категорий сервиса )
-let selectedCategoryService = (listServices) => {
+let selected = (list) => {
   return new Promise((resolve, reject) => {
-    let selectedCategoryService = [];
-    listServices.forEach((elem) => {
+    let selected = [];
+    list.forEach((elem) => {
       if (elem.checked === true) {
-        selectedCategoryService.push(elem.value);
+        selected.push(elem.value);
       }
     });
-    resolve(selectedCategoryService);
+    resolve(selected);
   });
 };
+// //Определяем новый промис (возвращает массив выбранных тарифов сервиса )
+// let selectedTariffService = (listTariff) => {
+//   return new Promise((resolve, reject) => {
+//     let selectedTariffService = [];
+//     listTariff.forEach((elem) => {
+//       if (elem.checked === true) {
+//         selectedTariffService.push(elem.value);
+//       }
+//     });
+//     resolve(selectedTariffService);
+//   });
+// };
 // для форматирования даты
 let DateTime = luxon.DateTime;
 
@@ -77,40 +89,6 @@ let start = function () {
       });
     });
 
-    // /////////////////////////////////////////////////////////////////
-    // let listCalendarItemMenudel = document.querySelectorAll(
-    //   ".listCalendar__item-menudel"
-    // );
-    // console.log(listCalendarItemMenudel);
-    // listCalendarItemMenudel.forEach(function (elem) {
-    //   elem.addEventListener("click", async function () {
-    //     let response = await fetch(
-    //       `/admin/delcalendaritem/${this.previousElementSibling.value}`,
-    //       {
-    //         method: "DELETE",
-    //       }
-    //     );
-    //     let result = await response.json();
-    //     if (response.status == 200) {
-    //       tooltip.classList.add("tooltip-good");
-    //       this.parentElement.parentElement.removeChild(this.parentElement);
-    //     } else {
-    //       tooltip.classList.add("tooltip-error");
-    //     }
-    //     tooltip.innerHTML = result.message;
-    //     setTimeout(() => {
-    //       console.log("удаляем классы у tooltip");
-    //       tooltip.classList.remove("tooltip-good");
-    //       tooltip.classList.remove("tooltip-error");
-    //     }, 6000);
-    //   });
-    //   this;
-    // });
-    // ///////////////////////////////////////////////////////
-    // listCalendarItemMenudel.addEventListener("click", () => {
-    //   console.log("удаляем день из рабочего календаря");
-    // });
-    /////////////////////////////////////////////////////////////////
     let selectedDate;
     let formatedDate;
     let inp = rabCalendar.querySelector(".choiceDate");
@@ -326,6 +304,7 @@ let start = function () {
   let formAddService = document.querySelector(".formaddservice");
 
   if (formAddService) {
+    //Выбираем возрастные категории
     let categoryService = document.querySelectorAll(".category_service");
     categoryService.forEach((elem) => {
       let toggle = false;
@@ -334,7 +313,16 @@ let start = function () {
         toggle = !toggle;
       });
     });
-
+    //Выбираем тарифы
+    let listTariffService = document.querySelectorAll(".tariff_service");
+    listTariffService.forEach((elem) => {
+      let toggle = false;
+      elem.addEventListener("click", function () {
+        this.setAttribute("checked", !toggle);
+        toggle = !toggle;
+      });
+    });
+    /////////////////////////////////////////////////////////////////////////////////////
     let btnAddService = document.querySelector(".form__btn-addservice");
     let inputNameService = document.querySelector(".name_service");
     let inputPosterService = document.querySelector(".afisha_service");
@@ -344,12 +332,13 @@ let start = function () {
     let inputColorService = document.querySelector(".color_service");
     btnAddService.addEventListener("click", async () => {
       console.log("Добавляем услугу");
-      let selCategoryService = await selectedCategoryService(categoryService);
+      let selCategoryService = await selected(categoryService);
       console.log(
         `выбранные категории:${selCategoryService} 'это массив? ${Array.isArray(
           selCategoryService
         )}`
       );
+      let selTariffService = await selected(listTariffService);
       console.log(inputColorService.value);
       console.log(tinymce.get("textareaaboutservice").getContent());
       //     ////////////////////////////////////////
@@ -359,9 +348,13 @@ let start = function () {
         "aboutService",
         tinymce.get("textareaaboutservice").getContent()
       );
-      //Передаем через formdata массив
+      //Передаем через formdata массив выбранных возрастных категорий
       for (let x = 0; x < selCategoryService.length; x++) {
         formData.append("categoryService", selCategoryService[x]);
+      }
+      //Передаем через formdata массив выбранных тарифов
+      for (let x = 0; x < selTariffService.length; x++) {
+        formData.append("tariffesService", selTariffService[x]);
       }
 
       //formData.set("categoryService", selCategoryService);
@@ -403,15 +396,6 @@ let start = function () {
   let razdelRegRab = document.querySelector(".razdelRegRab");
   //Если выбран пункт меню Режимы работы
   if (razdelRegRab) {
-    //Выводим в секцию с классом grafInspection график проверки
-    // let regRab = document.querySelector(".grafInspection");
-
-    // grafInspection.forEach((elem, index) => {
-    //   let span = document.createElement("span");
-    //   span.innerHTML = `<b>${index}</b>: ${elem}`;
-    //   regRab.appendChild(span);
-    // });
-
     /////////////////////////////////////////////
     //Для редактирования и удаления режимов
 
@@ -589,11 +573,29 @@ let start = function () {
           );
           if (formEditService) {
             //setTimeout(() => {
-            let cs = formEditService.querySelectorAll(".category_service"); //input id возрастной категории
-            let sc = formEditService.querySelector(".selectedCategory").value; // input строка выбранных категорий сервиса
-            let arraySc = sc.split(","); //разбиваем строку на елементы массива
+            let listTariffes =
+              formEditService.querySelectorAll(".tariff_service"); //массив тарифов полный список
+            let selectedTariffes =
+              formEditService.querySelector(".selectedTariff").value; // строка тарифов выбранного сервиса
+            let cs = formEditService.querySelectorAll(".category_service"); //массив id возрастных категорий полный список
+            let sc = formEditService.querySelector(".selectedCategory").value; // строка  категорий сервиса
+            let arraySc = sc.split(","); //разбиваем строку возрастных категорий выбранного сервиса на елементы массива
             cs.forEach((elm) => {
               if (arraySc.includes(elm.value)) {
+                elm.setAttribute("checked", true);
+              }
+              elm.addEventListener("click", function () {
+                if (this.hasAttribute("checked")) {
+                  this.removeAttribute("checked");
+                } else {
+                  this.setAttribute("checked", true);
+                }
+              });
+            });
+            /////////////////////////////////////////////////
+            let arraySelectedTariffes = selectedTariffes.split(","); //разбиваем строку на елементы массива
+            listTariffes.forEach((elm) => {
+              if (arraySelectedTariffes.includes(elm.value)) {
                 elm.setAttribute("checked", true);
               }
               elm.addEventListener("click", function () {
@@ -625,8 +627,8 @@ let start = function () {
               let colorService = formEditService.querySelector(
                 "[data-color-service]"
               ).value;
-              let arrCategoryService = await selectedCategoryService(cs); //эта функция возвращает промис (прописана в начале кода)
-
+              let arrCategoryService = await selected(cs); //эта функция возвращает промис (прописана в начале кода)
+              let arrTariffesService = await selected(listTariffes); //эта возвращает промис (прописана в начале кода)
               console.log(arrCategoryService);
               let formData = new FormData();
               for (let i = 0; i < posterService.files.length; i++) {
@@ -634,6 +636,9 @@ let start = function () {
               }
               for (let i = 0; i < arrCategoryService.length; i++) {
                 formData.append("categoryService", arrCategoryService[i]);
+              }
+              for (let i = 0; i < arrTariffesService.length; i++) {
+                formData.append("tariffesService", arrTariffesService[i]);
               }
               formData.set("aboutService", aboutService);
               formData.set("nameService", nameService);
@@ -673,19 +678,6 @@ let start = function () {
       });
     });
   }
-
-  //для формы добавления дня в рабочий календарь
-
-  // let calendarItemAddBtn = document.querySelector(
-  //   ".formAddCalendarItem__addbtn"
-  // );
-  // // if (calendarItemAddBtn) {
-  //   //console.log(calendarItemAddBtn);
-  //   calendarItemAddBtn.addEventListener("click", () => {
-  //     console.log("добавляем день в календарь");
-  //   });
-  // // }
-  ///////////////////////
 
   let wrapmodal = document.querySelector(".wrapmodal");
   wrapmodal.addEventListener("click", function (event) {
@@ -833,7 +825,153 @@ let start = function () {
       }, 6000);
     });
   }
+  ////////////////////////////////////////////////////////////
+  let listTariffes = document.querySelector("[data-listtariffesadmin]");
+  if (listTariffes) {
+    console.log("Список тарифов");
+    let btnAddtariff = listTariffes.querySelector(".form__btn-addtariff");
+    btnAddtariff.addEventListener("click", async () => {
+      let addTariffName = listTariffes.querySelector(".add-tariff-name");
+      let tariffName;
+      let addTariffPrice = listTariffes.querySelector(".add-tariff-price");
+      let tariffPrice;
+      let addTariffLessons = listTariffes.querySelector(".add-tariff-lessons");
+      let tariffLessons;
+      let regexpNumber = /^\d+$/; //Проверяем что введены только цыфры
+      if (addTariffName.value == "") {
+        addTariffName.classList.add("form__input_error");
+      } else {
+        console.log(addTariffName.value);
+        tariffName = addTariffName.value;
+      }
+      if (addTariffPrice.value == "") {
+        addTariffPrice.classList.add("form__input_error");
+      } else if (regexpNumber.test(addTariffPrice.value)) {
+        tariffPrice = addTariffPrice.value;
+      } else {
+        addTariffPrice.classList.add("form__input_error");
+      }
+
+      if (addTariffLessons.value == "") {
+        tariffLessons = "1";
+      } else if (regexpNumber.test(addTariffLessons.value)) {
+        tariffLessons = addTariffLessons.value;
+      } else {
+        addTariffLessons.classList.add("form__input_error");
+      }
+      let listInputError = listTariffes.querySelectorAll(".form__input_error");
+
+      if (listInputError.length == 0) {
+        let response = await fetch("/admin/addtariff", {
+          method: "POST",
+          body: JSON.stringify({
+            nameTariff: tariffName,
+            priceTariff: tariffPrice,
+            lessonsTariff: tariffLessons,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        //console.log(response);
+        let result = await response.json();
+        if (result.itog == "1") {
+          let newTariff = document.createElement("section");
+          newTariff.classList.add("list__item");
+          newTariff.classList.add("grid");
+          newTariff.innerHTML = ` <div class="list__item-about grid"><div class="list__item-about-text">${addTariffName.value}</div>
+            <div class="list__item-text">${addTariffPrice.value}</div>
+            <div class="list__item-text">${addTariffLessons.value}</div>
+             </div>`;
+          let parent = listTariffes.querySelector(".new-tariff");
+          parent.appendChild(newTariff);
+          addTariffName.value = "";
+          addTariffPrice.value = "";
+          addTariffLessons.value = "";
+        }
+      } else {
+        listInputError[0].focus();
+        listInputError.forEach((elem) => {
+          elem.addEventListener("input", function () {
+            this.classList.remove("form__input_error");
+          });
+        });
+      }
+    });
+    //Удаление категорий
+    let delTariff = document.querySelectorAll(".deltariff");
+    delTariff.forEach((elem) => {
+      elem.addEventListener("click", async function () {
+        let idTariff = this.querySelector(".idtariff").value;
+        let response = await fetch(`/admin/deltariff/${idTariff}`, {
+          method: "DELETE",
+        });
+      });
+    });
+    //////////////////////////
+    //вывод модального окна редактирования тарифа
+    let listLblEditTariff = listTariffes.querySelectorAll(".edit-tariff");
+    listLblEditTariff.forEach((elem) => {
+      elem.addEventListener("click", async function () {
+        let idtariff = this.querySelector(".idtariff").value;
+        let response = await fetch(`/admin/edittariff/${idtariff}`, {
+          method: "GET",
+        });
+        let result = await response.text();
+        console.log(result);
+        document.querySelector(".modal_content").innerHTML = result;
+        wrapmodal.classList.add("visible");
+        ///////////////////////////////////////////////
+        let formEditTariff = document.querySelector("[data-formedittariff]");
+        let formBtnEditTariff = formEditTariff.querySelector(
+          ".form__btn-edittariff"
+        );
+        formBtnEditTariff.addEventListener("click", async () => {
+          console.log("сохраняем изменения");
+          let editIdTariff = formEditTariff.querySelector(".id_tariff").value;
+
+          let editNameTariff =
+            formEditTariff.querySelector(".edit-tariff-name").value;
+
+          let editPriceTariff =
+            formEditTariff.querySelector(".edit-tariff-price").value;
+
+          let editLessonsTariff = formEditTariff.querySelector(
+            ".edit-tariff-lessons"
+          ).value;
+
+          let response = await fetch("/admin/edittariff", {
+            method: "PUT",
+            body: JSON.stringify({
+              editIdTariff: editIdTariff,
+              editNameTariff: editNameTariff,
+              editPriceTariff: editPriceTariff,
+              editLessonsTariff: editLessonsTariff,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          let result = await response.json();
+          console.log(response);
+          console.log(result);
+          if (result.itog == "Ok") {
+            wrapmodal.classList.remove("visible");
+            elem.parentElement.parentElement.children[1].children[0].innerHTML =
+              editNameTariff;
+            elem.parentElement.parentElement.children[1].children[1].innerHTML =
+              editPriceTariff;
+            elem.parentElement.parentElement.children[1].children[2].innerHTML =
+              editLessonsTariff;
+          }
+        });
+
+        ////////////////////////////////////////////
+      });
+    });
+  }
+
+  /////////////////////////////////////////////////////////
 };
+/////////////////////////////////////////////////
 
 //////////////////////////////////////////////////
 //Запускаем функцию start только после того как браузер полностью построен DOM HTML страницы .

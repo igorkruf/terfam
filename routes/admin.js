@@ -42,4 +42,9 @@ adminRouter.post(
   adminController.addInGalleryService
 );
 adminRouter.delete("/delregistration/:id", adminController.delRegistration);
+adminRouter.get("/listtariffes", adminController.getListTariffes);
+adminRouter.post("/addtariff", adminController.addTariff);
+adminRouter.delete("/deltariff/:id", adminController.delTariff);
+adminRouter.get("/edittariff/:id", adminController.getFormEditTariff);
+adminRouter.put("/edittariff", adminController.saveChangesTariff);
 export default adminRouter;
