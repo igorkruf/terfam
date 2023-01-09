@@ -9,7 +9,22 @@
         <input type="file" class="form__input" data-poster-service>
         </div>
         <textarea id="textareaaboutserviceedit{{selectedService._id}}" class="form__textarea" data-about-service cols="30" rows="10"></textarea>
-        
+
+ <div class="adv_service grid">
+<div>Вид услуги:</div>
+<select class="form__input edit-type-service ">            
+{{#each listTypes}}
+
+{{#if (eqIdType  this._id ../selectedService.typeService._id)}}
+ <option value="{{this._id}}" selected>{{this.nameTypeService}}</option>
+ {{else}}
+ <option value="{{this._id}}" >{{this.nameTypeService}}</option>
+ {{/if}}
+ 
+{{/each}}
+</select>
+</div>
+
 <div class="adv_service grid">
 <div>Возростная категория:</div>
 <div class="form__input ">    

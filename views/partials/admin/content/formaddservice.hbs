@@ -2,12 +2,21 @@
     <h1>Форма добавления услуги</h1>
     <div class="form grid">
         <input type="text" class="form__input name_service" placeholder="Название услуги (обязательно)" />
+        
         <div class="adv_service grid">
             <div>Афиша: </div>
         <input type="file" class=" form__input afisha_service">
         </div>
         <textarea id="textareaaboutservice" class="form__textarea about_service" cols="30" rows="10"></textarea>
-        
+<div class="adv_service grid">
+<div>Вид услуги:</div>
+<select class="form__input type-service ">            
+{{#each listTypes}}
+<option  value={{_id}} >{{nameTypeService}}</option>
+{{/each}}
+</select>
+</div>
+ 
 <div class="adv_service grid">
 <div>Возростная категория:</div>
 <div class="form__input ">            

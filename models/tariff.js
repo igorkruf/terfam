@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 // установка схемы
 const newSchema = new Schema(
   {
+    typeServiceTariff: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "typeservice",
+    },
     nameTariff: {
       type: String,
       required: true,

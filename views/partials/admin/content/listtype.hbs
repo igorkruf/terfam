@@ -1,0 +1,25 @@
+<section data-listtype>
+<h1>Форма добавления вида услуг</h1>
+{{>admin/content/formaddtype}}
+<h1>Список видов услуг</h1>
+<section class="list_admin grid">
+{{#each listTypes}}
+<section class="list__item grid">
+    <nav class="list__item-menu grid">
+        <div></div>
+        <div class="edit edittype"><input type="hidden" class="idtype" value={{_id}}> </div>
+        <div class="del">
+            <div class="del__confirm grid">
+                <span class="del__confirm-text" >Уверен?</span>
+                <div class="del__confirm-btns grid"><span class="del__confirm-btn deltype">Да<input type="hidden" class="idtype" value={{_id}}></span><span class="del__confirm-btn nodeltype">Нет</span></div> 
+            </div>
+            
+        </div>
+    </nav>
+
+  <div class="list__item-text">{{nameTypeService}}</div>
+   
+</section>
+{{/each}}
+</section> 
+</section>

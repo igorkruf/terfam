@@ -2,6 +2,8 @@ import fs from "fs/promises";
 import { DateTime } from "luxon";
 
 import Service from "./models/service.js";
+import Tariff from "./models/tariff.js";
+
 export default {
   getTimeRegistrationFromId: (timeId) => {
     return grafInspection[timeId];
@@ -46,4 +48,51 @@ export default {
     let STR = str.toUpperCase();
     return STR;
   },
+  // //Блок цена для "About Service"
+  // getTariffService: async (idTariff) => {
+  //   let tariff = await Tariff.findById(idTariff);
+  //   return tariff;
+  // },
+  getFormatedPrice: (price) => {
+    let intPrice = Math.ceil(price); //Округляем всегда в большую сторону до целого числа
+    let txtPrice = String(intPrice); //Приводим к строке
+    let arrPrice = txtPrice.split("");
+    arrPrice.reverse();
+    let arrFormatedPrice = [];
+
+    arrPrice.forEach((elem, i) => {
+      arrFormatedPrice.push(elem);
+      if ((i + 1) % 3 == 0) {
+        arrFormatedPrice.push(" ");
+      }
+    });
+    let formatedPrice = arrFormatedPrice.reverse().join("");
+    // for (let i=0; i<arrPrice.length; i++){
+
+    // }
+    return formatedPrice;
+  },
+
+  //Хэлпер сравнения id typeService выбранного... c id всех видов услуг
+  eqIdType: function (a, b) {
+    let aa = JSON.stringify(a);
+    let bb = JSON.stringify(b);
+    return aa == bb;
+  },
+  //Хэлпер сравнения индекса слайда если первый (0) то отобразить сначала добавить класс "slide_visible"
+
+  ifFirst: (index) => {
+    if (index == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  ifListSlides: (listSlides) => {
+    if (listSlides.length > 0) {
+      return true;
+    }
+    return false;
+  },
+  ///////////////////////////////////////////////////////////
 };

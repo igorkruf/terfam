@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 // установка схемы
 const newSchema = new Schema(
   {
+    typeService: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "typeservice",
+    },
     nameService: {
       type: String,
       required: true,
@@ -14,6 +18,13 @@ const newSchema = new Schema(
     categoryService: {
       type: Array,
     },
+    //Ниже приведен правильный код(схема)
+    // posts: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Story'
+    //   }
+    // ]
     colorService: {
       type: String,
     },

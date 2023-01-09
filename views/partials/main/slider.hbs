@@ -1,0 +1,22 @@
+
+<section class="slider grid">
+    
+ {{#each listSlides}}
+ {{#if (ifFirst @index)}}
+<div class="slide slide_visible" style="background-color: {{this.colorService}}">
+ {{else}}
+<div class="slide" style="background-color: {{this.colorService}}">
+    {{/if}}
+ 
+   
+    <div class="grid content slide-content">
+{{>main/slideritem}}
+
+    </div>   
+<div class="btn-to btn-to_left"></div>     
+<div class="btn-to btn-to_right"></div>
+</div>
+
+{{/each}}
+
+</section>

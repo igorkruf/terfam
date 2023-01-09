@@ -17,6 +17,9 @@ body{
     padding:20px;
     border:1px solid $clrService2;
 }
+.form__input_type-service{
+    cursor:pointer;
+}
 
 .wrapAdmin{
     
@@ -65,13 +68,14 @@ text-decoration: none;
 //Всплывающая подсказка
 .tooltip{
     padding:5px 10px;
-    position:absolute;
+    position:fixed;
     top:-100px;
     right: 10vw;
     width: 300px;
     background-color: green;
     text-align: center;
     color:#fff;
+    z-index: 100;
     @include br(5px);
 }
 .tooltip-error{
@@ -284,6 +288,7 @@ text-decoration: none;
     height:40px;
     cursor:pointer;
     background: url("../img/close.png") no-repeat right/contain;
+    margin-bottom: 20px;
 }
 // форма добавления даты в рабочий календарь
 .formAddCalendarItem{
@@ -448,5 +453,5 @@ grid-row-gap: 20px;
  }
  .list__item-about{
     // border:1px solid red;
-    grid-template-columns: 1fr 25% 25%;
+    grid-template-columns: 1fr 30% 10% 5%;
  }

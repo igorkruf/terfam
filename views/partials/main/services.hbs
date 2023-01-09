@@ -1,13 +1,28 @@
  <section class="grid" data-listservices >
+    {{#if mainPage}}
+    {{!-- Есть ли слайды --}}
+    {{#if (ifListSlides listSlides)}}
+    <div class="width100 grid ">
+          <div class="main-page-mobile-slider">
+            {{>main/mobile-slider}}
+          </div>
+            <div class="main-page-slider grid"> 
+        
+            {{>main/slider}}
+            </div>
+        
+    </div>
+    {{/if}}
+    {{/if}}
+   {{!-- {{#if listCategory}} --}}
     {{#each listCategory}}
 
  <div class="partservices grid">
     <div class="partservices__content content grid" data-ageservices="{{this.ageCategory}}">
         {{this.nameCategory}}
     </div>
-   
-   
 </div>
+{{!-- {{/if}} --}}
 <div class="width100 grid">
  <div class="content grid">   
 <section class="listservices grid">
@@ -28,6 +43,7 @@
 </section>
 </div>
     </div>
+  {{!-- {{#if listCategory}}    --}}
 {{/each}}
-
+{{!-- {{/if}} --}}
  </section>

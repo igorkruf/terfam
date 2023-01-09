@@ -9,5 +9,6 @@ mineRouter.get(
 );
 mineRouter.get("/listnews", mainController.getListNewsInnerHtml);
 mineRouter.get("/news", mainController.getListNews);
-
+mineRouter.get("/detailprice/:id", mainController.getDetailPriceService);
+mineRouter.get("/services/type/:id", mainController.getListServicesByType);
 export default mineRouter;

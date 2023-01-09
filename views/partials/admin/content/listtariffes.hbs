@@ -4,9 +4,10 @@
 <div class="new-tariff"></div>
 <h1>Список тарифов</h1>
 <div class="list__item-about grid">
-    <div class="list__item-about-text">Триф</div>
-   <div class="list__item-text">Стоимость руб/месяц</div>
-   <div class="list__item-text">Колличество занятий/месяц</div>
+    <div class="list__item-about-text">Тариф</div>
+    <div class="list__item-about-text">Тип услуги</div>
+   <div class="list__item-text">рубл</div>
+   <div class="list__item-text">занятий</div>
     </div>
 <section class="listtariffes grid">
 {{#each listTariffes}}
@@ -25,6 +26,7 @@
     </nav>
 <div class="list__item-about grid">
     <div class="list__item-about-text">{{nameTariff}}</div>
+    <div class="list__item-about-text">{{typeServiceTariff.nameTypeService}}</div>
    <div class="list__item-text">{{priceTariff}}</div>
    <div class="list__item-text">{{lessonsTariff}} </div>
     </div>

@@ -2,12 +2,30 @@ console.log("подключили скрипты");
 //Для всплывающих подсказок
 
 let start = async function () {
+  let headerLogo = document.querySelector(".header__logo");
+  headerLogo.addEventListener("click", () => {
+    console.log("www");
+    window.location.href = "/";
+  });
   let mainContent = document.querySelector(".main");
   let listServices = document.querySelector("[data-listservices]");
   let listServicesItem = document.querySelector("[data-aboutservice]");
+  let aboutService = document.querySelector("[data-aboutservice]");
   let listCategoryInnerhtml = document.querySelectorAll(
     ".menu__item-innerhtml"
   );
+
+  let listTypeAdvServicesInnerhtml = document.querySelectorAll(
+    ".menu__item_adv-innerhtml"
+  );
+
+  for (let i = 0; i < listTypeAdvServicesInnerhtml.length; i++) {
+    listTypeAdvServicesInnerhtml[i].addEventListener("click", function () {
+      console.log("wwwwwwwwwwwwwwwwwwwwwwwwww");
+      window.location.href = `/services/type/${this.dataset.idtypeservice}`;
+    });
+  }
+
   let menuItems = document.querySelectorAll(".menu__item");
   menuItems.forEach((elem) => {
     elem.addEventListener("click", function () {
@@ -17,6 +35,7 @@ let start = async function () {
       this.classList.add("selmenuitem");
     });
   });
+
   listCategoryInnerhtml.forEach((elem) => {
     elem.addEventListener("click", async function () {
       let response = await fetch(
@@ -35,10 +54,78 @@ let start = async function () {
       closeMainMenu(wrapmainmenu, mainMenu, menuItems);
     });
   });
+
   //Если выбрали список услуг(главная страница)
   if (listServices) {
     let listServicesItem = listServices.querySelectorAll(".listservices__item");
+    //Переход на услугу из слайдера для мобильных устройств
+    let listMobileSliderItem = document.querySelectorAll(".mobile-slideritem");
+    listMobileSliderItem.forEach((elem) => {
+      elem.addEventListener("click", function () {
+        window.location.href = `/service/${this.firstElementChild.value}`;
+      });
+    });
+    let slider = listServices.querySelector(".slider");
+    if (slider) {
+      //проверяем есть ли блок .slider (у нас он только на гланой странице ) если есть то выполняем следующий код
+      let startSliderId = setInterval(startSlider, 5000);
 
+      let listSlides = document.querySelectorAll(".slide");
+      for (let i = 0; i < listSlides.length; i++) {
+        listSlides[i].addEventListener("mouseover", () => {
+          clearInterval(startSliderId);
+        });
+        listSlides[i].addEventListener("mouseout", () => {
+          startSliderId = setInterval(startSlider, 5000);
+        });
+        let btnToLeft = listSlides[i].querySelector(".btn-to_left");
+        let btnToRight = listSlides[i].querySelector(".btn-to_right");
+        //Клик по кнопке в лево
+        btnToLeft.addEventListener("click", function (event) {
+          event.stopPropagation();
+          listSlides.forEach((el) => {
+            el.classList.remove("slide_visible");
+          });
+          if (i == 0) {
+            listSlides[listSlides.length - 1].classList.add("slide_visible");
+          } else {
+            listSlides[i].previousElementSibling.classList.add("slide_visible");
+          }
+        });
+        //Клик по кнопке в право
+        btnToRight.addEventListener("click", function () {
+          listSlides.forEach((el) => {
+            el.classList.remove("slide_visible");
+          });
+          if (i == listSlides.length - 1) {
+            listSlides[0].classList.add("slide_visible");
+          } else {
+            listSlides[i].nextElementSibling.classList.add("slide_visible");
+          }
+        });
+        //Переход на страницу услуги
+        let nameService = listSlides[i].querySelector(
+          ".slider-item__about_name"
+        );
+        let idService = nameService.firstElementChild.value;
+        nameService.addEventListener("click", () => {
+          window.location.href = `/service/${idService}`;
+        });
+        //Переход на список услуг данного типа
+        let nameTypeService = listSlides[i].querySelector(
+          ".slider-item__about_type"
+        );
+        let idTypeService = nameTypeService.firstElementChild.value;
+        nameTypeService.addEventListener("click", () => {
+          window.location.href = `/services/type/${idTypeService}`;
+        });
+      }
+      function startSlider() {
+        let visibleSlide = document.querySelector(".slide_visible");
+        let btnToRight = visibleSlide.querySelector(".btn-to_right");
+        btnToRight.click();
+      }
+    }
     console.log(listServicesItem);
   }
   /////////////////////////////////////////////
@@ -73,7 +160,20 @@ let start = async function () {
   mainMenu.addEventListener("click", (event) => {
     event.stopPropagation();
   });
+  /////////////////////////////////
+  if (aboutService) {
+    let detailPriceService = aboutService.querySelector(".detailPrice");
+    let idService = detailPriceService.previousElementSibling.value;
+    detailPriceService.addEventListener("click", async () => {
+      let response = await fetch(`/detailprice/${idService}`, {
+        method: "GET",
+      });
+      let result = await response.text();
 
+      document.querySelector(".modal_content").innerHTML = result;
+      wrapmodal.classList.add("visible");
+    });
+  }
   ///////////////////////////////////////////////
   let wrapmodal = document.querySelector(".wrapmodal");
   wrapmodal.addEventListener("click", function (event) {
@@ -137,8 +237,6 @@ let start = async function () {
   } else {
     console.log("уже показали новости");
   }
-  ////////////////////////////////////////////////////////////
-  //}
 };
 
 //Запускаем функцию start только после того как браузер полностью построен DOM HTML страницы .

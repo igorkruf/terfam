@@ -3,8 +3,13 @@
 @import "_galleryservice.scss";
 @import "_footer.scss";
 @import "_mainmenu.scss";
+@import "sliders.scss";
 @import "listnews.scss";
 @import"listnewsfetch.scss";
+@import "price";
+@import "listtariffesmodal";
+
+
 * ,*:before, *:after{
     box-sizing: border-box;
     // font-family: "OpenSans-Regular";
@@ -16,6 +21,10 @@ body{
        // width: calc(100vw - 17px);//
   height:100vh;
   grid-template-rows: 150px 1fr 150px;
+}
+select {
+  font-size: 16px;
+  font-family: 'Roboto-Thin';
 }
 .header{
   position: relative;
@@ -161,6 +170,7 @@ margin-left: 10px;
 .content{
   width:100%;
   max-width: 1200px;
+  
   //  border:1px solid green;
   //padding: 40px 0px;
 
@@ -218,6 +228,7 @@ a{text-decoration: none}
   //margin-top: 50px;
   
 }
+
 .partservices{
 
   background-color: $clr;
@@ -415,6 +426,13 @@ padding:20px;
 }
 
 @media (max-width:850px) {
+  //Убираем слайдер
+  .main-page-slider{
+    display:none;
+  }
+  .main-page-mobile-slider{
+    display:grid;
+  }
  
   .header_hamburgermenu{
     // border:1px solid red;
@@ -428,7 +446,7 @@ padding:20px;
   }
   .header__menu{
     padding-right: 2%;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(75% 0%, 100% 0%, 100% 100%, 75% 100%);
     background-color: rgba(255, 255, 255, 0);
   
   }
@@ -445,6 +463,11 @@ padding:20px;
   .header__logo{
     background: url(/img/logo_main_fon.jpg)  left center / auto 70%   no-repeat ;
   }
+  .list-tariffes-service-item_modal{
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+  }
+
 }
 @media (max-width:680px) {
   body{grid-template-rows: 75px 1fr 100px;}
@@ -583,3 +606,4 @@ padding: 0px 20px;
 .visible{
   display:grid;
 }
+@import "listservicesbytype.scss";

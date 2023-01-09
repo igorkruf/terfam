@@ -1,0 +1,17 @@
+
+.list-services-by-type {
+   
+}
+.list-services-by-type__name-type{
+    padding-left: 30px;
+  position:relative;
+  background-color: $clrheadermenu;
+  align-items: center;
+  font-size: 26px;
+  font-family: 'Neucha';
+  color:#fff;
+  height:50px;
+  @include ns();
+  
+}
+

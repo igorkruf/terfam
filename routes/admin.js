@@ -47,4 +47,10 @@ adminRouter.post("/addtariff", adminController.addTariff);
 adminRouter.delete("/deltariff/:id", adminController.delTariff);
 adminRouter.get("/edittariff/:id", adminController.getFormEditTariff);
 adminRouter.put("/edittariff", adminController.saveChangesTariff);
+adminRouter.get("/listtype", adminController.getListTypes);
+adminRouter.post("/addtypeservice", adminController.addTypeService);
+adminRouter.delete("/deltypeservice/:id", adminController.delTypeService);
+adminRouter.get("/edittypeservice/:id", adminController.getFormEditTypeService);
+adminRouter.put("/edittypeservice/:id", adminController.saveChangesType);
+
 export default adminRouter;

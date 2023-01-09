@@ -3,11 +3,16 @@ console.log("подключили скрипты Админпанели");
 let selected = (list) => {
   return new Promise((resolve, reject) => {
     let selected = [];
-    list.forEach((elem) => {
-      if (elem.checked === true) {
-        selected.push(elem.value);
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].checked === true) {
+        selected.push(list[i].value);
       }
-    });
+    }
+    // list.forEach((elem) => {
+    //   if (elem.checked === true) {
+    //     selected.push(elem.value);
+    //   }
+    // });
     resolve(selected);
   });
 };
@@ -326,6 +331,7 @@ let start = function () {
     let btnAddService = document.querySelector(".form__btn-addservice");
     let inputNameService = document.querySelector(".name_service");
     let inputPosterService = document.querySelector(".afisha_service");
+    let typeService = formAddService.querySelector(".type-service");
 
     // let myContent = tinymce.get("textareaaboutservice").getContent();
 
@@ -343,6 +349,7 @@ let start = function () {
       console.log(tinymce.get("textareaaboutservice").getContent());
       //     ////////////////////////////////////////
       let formData = new FormData();
+      formData.set("typeService", typeService.value);
       formData.set("nameService", inputNameService.value);
       formData.set(
         "aboutService",
@@ -356,6 +363,7 @@ let start = function () {
       for (let x = 0; x < selTariffService.length; x++) {
         formData.append("tariffesService", selTariffService[x]);
       }
+      // window.location.href;
 
       //formData.set("categoryService", selCategoryService);
       formData.set("colorService", inputColorService.value);
@@ -369,15 +377,17 @@ let start = function () {
       console.log(response);
       let result = await response.json();
       console.log(result);
-      if (response.status == 200) {
+      if (result.code == 1) {
+        console.log("Сервис Успешно добавлен");
         tooltip.classList.add("tooltip-good");
-        //Сбрасываем значения в полях формы на исходные
-        tinymce.activeEditor.setContent("");
-        inputPosterService.value = null;
-        inputNameService.value = null;
-        categoryService.forEach((elem) => {
-          elem.checked = false;
-        });
+        window.location.href = "/admin/addservice";
+        // //Сбрасываем значения в полях формы на исходные
+        // tinymce.activeEditor.setContent("");
+        // inputPosterService.value = null;
+        // inputNameService.value = null;
+        // categoryService.forEach((elem) => {
+        //   elem.checked = false;
+        // });
       } else {
         tooltip.classList.add("tooltip-error");
       }
@@ -390,6 +400,7 @@ let start = function () {
       // });
       //     /////////////////////////////////////////
     });
+    selectTariffesByTypeService(typeService.value);
   }
   //}
   ///////////////////////////////////////////////////////////////
@@ -615,6 +626,8 @@ let start = function () {
               "[data-btn-save-service]"
             );
             btnSaveService.addEventListener("click", async () => {
+              let idTypeService =
+                formEditService.querySelector(".edit-type-service").value;
               let idService =
                 formEditService.querySelector("[data-idservice]").value;
               //console.log(posterService.files[0]);
@@ -630,6 +643,7 @@ let start = function () {
               let arrCategoryService = await selected(cs); //эта функция возвращает промис (прописана в начале кода)
               let arrTariffesService = await selected(listTariffes); //эта возвращает промис (прописана в начале кода)
               console.log(arrCategoryService);
+              console.log(arrTariffesService);
               let formData = new FormData();
               for (let i = 0; i < posterService.files.length; i++) {
                 formData.append("posterService", posterService.files[i]);
@@ -640,6 +654,7 @@ let start = function () {
               for (let i = 0; i < arrTariffesService.length; i++) {
                 formData.append("tariffesService", arrTariffesService[i]);
               }
+              formData.set("idTypeService", idTypeService);
               formData.set("aboutService", aboutService);
               formData.set("nameService", nameService);
               formData.set("colorService", colorService);
@@ -831,6 +846,10 @@ let start = function () {
     console.log("Список тарифов");
     let btnAddtariff = listTariffes.querySelector(".form__btn-addtariff");
     btnAddtariff.addEventListener("click", async () => {
+      let typeServiceTariff = listTariffes.querySelector(
+        ".form__input_type-service"
+      );
+      console.log(`Id типа услуги: ${typeServiceTariff.value}`);
       let addTariffName = listTariffes.querySelector(".add-tariff-name");
       let tariffName;
       let addTariffPrice = listTariffes.querySelector(".add-tariff-price");
@@ -865,6 +884,7 @@ let start = function () {
         let response = await fetch("/admin/addtariff", {
           method: "POST",
           body: JSON.stringify({
+            typeServiceTariff: typeServiceTariff.value,
             nameTariff: tariffName,
             priceTariff: tariffPrice,
             lessonsTariff: tariffLessons,
@@ -874,18 +894,21 @@ let start = function () {
         //console.log(response);
         let result = await response.json();
         if (result.itog == "1") {
-          let newTariff = document.createElement("section");
-          newTariff.classList.add("list__item");
-          newTariff.classList.add("grid");
-          newTariff.innerHTML = ` <div class="list__item-about grid"><div class="list__item-about-text">${addTariffName.value}</div>
-            <div class="list__item-text">${addTariffPrice.value}</div>
-            <div class="list__item-text">${addTariffLessons.value}</div>
-             </div>`;
-          let parent = listTariffes.querySelector(".new-tariff");
-          parent.appendChild(newTariff);
-          addTariffName.value = "";
-          addTariffPrice.value = "";
-          addTariffLessons.value = "";
+          window.location.href = "/admin/listtariffes";
+          // let newTariff = document.createElement("section");
+          // newTariff.classList.add("list__item");
+          // newTariff.classList.add("grid");
+          // newTariff.innerHTML = ` <div class="list__item-about grid">
+          // <div class="list__item-about-text">${addTariffName.value}</div>
+          // <div class="list__item-about-text">${typeServiceTariff.value}</div>
+          // <div class="list__item-text">${addTariffPrice.value}</div>
+          //   <div class="list__item-text">${addTariffLessons.value}</div>
+          //    </div>`;
+          // let parent = listTariffes.querySelector(".new-tariff");
+          // parent.appendChild(newTariff);
+          // addTariffName.value = "";
+          // addTariffPrice.value = "";
+          // addTariffLessons.value = "";
         }
       } else {
         listInputError[0].focus();
@@ -927,7 +950,8 @@ let start = function () {
         formBtnEditTariff.addEventListener("click", async () => {
           console.log("сохраняем изменения");
           let editIdTariff = formEditTariff.querySelector(".id_tariff").value;
-
+          let editTypeServiceTariff =
+            formEditTariff.querySelector(".edit-type-service").value;
           let editNameTariff =
             formEditTariff.querySelector(".edit-tariff-name").value;
 
@@ -942,6 +966,7 @@ let start = function () {
             method: "PUT",
             body: JSON.stringify({
               editIdTariff: editIdTariff,
+              editTypeServiceTariff: editTypeServiceTariff,
               editNameTariff: editNameTariff,
               editPriceTariff: editPriceTariff,
               editLessonsTariff: editLessonsTariff,
@@ -953,14 +978,9 @@ let start = function () {
           let result = await response.json();
           console.log(response);
           console.log(result);
-          if (result.itog == "Ok") {
+          if (result.code == 1) {
             wrapmodal.classList.remove("visible");
-            elem.parentElement.parentElement.children[1].children[0].innerHTML =
-              editNameTariff;
-            elem.parentElement.parentElement.children[1].children[1].innerHTML =
-              editPriceTariff;
-            elem.parentElement.parentElement.children[1].children[2].innerHTML =
-              editLessonsTariff;
+            window.location.href = "/admin/listtariffes";
           }
         });
 
@@ -968,11 +988,108 @@ let start = function () {
       });
     });
   }
-
   /////////////////////////////////////////////////////////
+  let listTypes = document.querySelector("[data-listtype]");
+  if (listTypes) {
+    let nameType = listTypes.querySelector(".form__input_addtype-name");
+    nameType.addEventListener("input", function () {
+      this.classList.remove("form__input_error");
+    });
+    let btnAddType = listTypes.querySelector(".form__btn-addtype");
+    btnAddType.addEventListener("click", async () => {
+      if (nameType.value != "") {
+        let response = await fetch("/admin/addtypeservice", {
+          method: "POST",
+          body: JSON.stringify({ nameType: nameType.value }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        let result = await response.json();
+        if (result.code == 1) {
+          window.location.href = "/admin/listtype";
+        } else {
+          tooltip.classList.add("tooltip-error");
+          tooltip.innerHTML = result.massege;
+        }
+      } else {
+        nameType.classList.add("form__input_error");
+      }
+    });
+  }
+  //Удаление типа услуги
+  let delType = document.querySelectorAll(".deltype");
+  delType.forEach((elem) => {
+    elem.addEventListener("click", async function () {
+      let idType = this.querySelector(".idtype").value;
+      let response = await fetch(`/admin/deltypeservice/${idType}`, {
+        method: "DELETE",
+      });
+      let result = await response.json();
+      if (result.code == 1) {
+        window.location.href = "/admin/listtype";
+      } else {
+        tooltip.classList.add("tooltip-error");
+        tooltip.innerHTML = result.massege;
+      }
+    });
+  });
+  //Изменение вида услуг
+  let editType = listTypes.querySelectorAll(".edittype");
+  editType.forEach((elem) => {
+    elem.addEventListener("click", async function () {
+      let idType = this.querySelector(".idtype").value;
+
+      let response = await fetch(`/admin/edittypeservice/${idType}`, {
+        method: "get",
+      });
+      let result = await response.text();
+      document.querySelector(".modal_content").innerHTML = result;
+      wrapmodal.classList.add("visible");
+      //Форма редактирования вида услуг
+      let formEditType = document.querySelector("[data-formedittype]");
+      if (formEditType) {
+        let btnEditType = formEditType.querySelector(".form__btn-edit-type");
+        btnEditType.addEventListener("click", async () => {
+          let idType = formEditType.querySelector(".id").value;
+          let newNameType = formEditType.querySelector(".type-name");
+          newNameType.value = newNameType.value.trim(); //Удаляем пробелы в начале и в конце в поле type-name
+          if (newNameType.value == "") {
+            newNameType.classList.add("form__input_error");
+            newNameType.focus();
+          } else {
+            let response = await fetch(`/admin/edittypeservice/${idType}`, {
+              method: "PUT",
+              body: JSON.stringify({ nameType: newNameType.value }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+            let result = await response.json();
+            if (result.code == 1) {
+              wrapmodal.classList.remove("visible");
+              window.location.href = "/admin/listtype";
+            }
+          }
+        });
+      }
+      // if (result.code == 1) {
+      //   window.location.href = "/admin/listtype";
+      // } else {
+      //   tooltip.classList.add("tooltip-error");
+      //   tooltip.innerHTML = result.massege;
+      // }
+    });
+  });
 };
 /////////////////////////////////////////////////
-
+//Функция выборки тарифов услуги определенного типа: idType и вывода в DOM элемент:  toDomElem
+async function selectTariffesByTypeService(idType, toDomElem) {
+  console.log("делаем фэтч запрос тарифов");
+  let response = await fetch(`/admin/selecttariffesbytype/${idType}`, {
+    method: "GET",
+  });
+}
 //////////////////////////////////////////////////
 //Запускаем функцию start только после того как браузер полностью построен DOM HTML страницы .
 document.addEventListener("DOMContentLoaded", start);

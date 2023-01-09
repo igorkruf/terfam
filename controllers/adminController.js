@@ -12,11 +12,13 @@ import News from "../models/new.js";
 import Category from "../models/category.js";
 import Service from "../models/service.js";
 import Tariff from "../models/tariff.js";
+import Type from "../models/typeservice.js";
 import Helpers from "../_helpers.js";
 
 import sharp from "sharp"; //для работы над файлами изображений
 //import { DateTime } from "luxon";
 import md5 from "md5";
+
 // import User from "../models/user.js";
 // import jwt from "jsonwebtoken";
 // const TOKEN_KEY = "inspection";
@@ -102,7 +104,8 @@ export default {
           /////////////////////////////////////
           //let ans = JSON.stringify({ ans: "No" });
           const token = process.env.TOKEN_TELEGRAM_BOT_CHIVIC;
-          const bot = new TelegramBot(token, { polling: { interval: 1000 } });
+          //const bot = new TelegramBot(token, { polling: { interval: 1000 } });
+          const bot = new TelegramBot(token, {});
           let keyboard = JSON.stringify({
             inline_keyboard: [
               [{ text: "Все объявления", url: "https://terfam/news" }],
@@ -369,10 +372,12 @@ export default {
     let listTariffes = await Tariff.find({})
       .sort([["priceTariff", "1"]])
       .lean();
+    let listTypes = await Type.find({}).lean();
     res.render("admin", {
       title: "Добавление услуги",
       listCategory: listCategory,
       listTariffes: listTariffes,
+      listTypes: listTypes,
       formAddService: true,
       helpers: {
         // getTimeRegistrationFromId: Helpers.getTimeRegistrationFromId,
@@ -385,6 +390,7 @@ export default {
     console.log("Добавляем сервис");
     //console.log(req.files.posterService);
     let addService = new Service({
+      typeService: req.body.typeService,
       nameService: req.body.nameService,
       aboutService: req.body.aboutService,
       categoryService: req.body.categoryService,
@@ -415,9 +421,6 @@ export default {
             fs.unlink(req.files.posterService[0].path);
             // posternews=`${addnews._id}.jpg`;
           })();
-          res.status(200).json({
-            message: "Сервис успешно добавлен в базу",
-          });
         }
         //если афишу не выбрали
         else {
@@ -425,6 +428,10 @@ export default {
           // posternews='smalllogo_fon.jpg';
         }
         /////////////////////////////////
+        res.status(200).json({
+          code: 1,
+          message: "Сервис успешно добавлен в базу",
+        });
       }
     });
   },
@@ -456,7 +463,10 @@ export default {
     let listTariffes = await Tariff.find({})
       .sort([["priceTariff", "1"]])
       .lean();
-    let selectedService = await Service.findById(req.body.idService).lean();
+    let listTypes = await Type.find({}).lean();
+    let selectedService = await Service.findById(req.body.idService)
+      .populate("typeService")
+      .lean();
     let posterSelectedService;
     //Если загружали постер сервиса
     try {
@@ -470,14 +480,14 @@ export default {
     console.log(posterSelectedService);
     console.log(selectedService);
     res.render("fetchpartial", {
+      listTypes: listTypes,
       listCategory: listCategory,
       listTariffes: listTariffes,
       selectedService: selectedService,
       posterSelectedService: posterSelectedService,
       getFormEditService: true,
       helpers: {
-        // getTimeRegistrationFromId: Helpers.getTimeRegistrationFromId,
-        // getWeekDay: Helpers.getWeekDay,
+        eqIdType: Helpers.eqIdType,
       },
       layout: "fetch",
     });
@@ -486,6 +496,20 @@ export default {
     console.log(
       `сохраняем изменения в услуге req.body.idService ${req.body.idService}`
     );
+    console.log("Проверка!!!");
+    console.log(req.body.categoryService);
+    console.log(req.body.tariffesService);
+    //DataForm - смотри скрипт на стороне клиента иногда не задаётся в моём случае если не выбран не один тариф и ни одна возрастная категория поэтому проверяем
+    let categoryService = []; // на тот случай если req.body.categoryService==undefined
+    if (typeof req.body.categoryService !== "undefined") {
+      categoryService = req.body.categoryService;
+    }
+    let tariffesService = []; // на тот случай если req.body.tariffesService==undefined
+
+    if (typeof req.body.tariffesService !== "undefined") {
+      tariffesService = req.body.tariffesService;
+    }
+    ////////////////////////////////////////////////////////
     console.log(req.files);
     //Если не сменили афишу услуги (не выбран файл изображения) то не переписываем файл
     if (req.files.posterService) {
@@ -508,10 +532,11 @@ export default {
       let result = await Service.updateOne(
         { _id: req.body.idService },
         {
+          typeService: req.body.idTypeService,
           nameService: req.body.nameService,
           aboutService: req.body.aboutService,
-          categoryService: req.body.categoryService,
-          tariffesService: req.body.tariffesService,
+          categoryService: categoryService,
+          tariffesService: tariffesService,
           colorService: req.body.colorService,
         }
       );
@@ -650,12 +675,15 @@ export default {
   getListTariffes: async (req, res) => {
     console.log("список тарифов");
     let listTariffes = await Tariff.find({})
+      .populate("typeServiceTariff")
       .sort([["priceTariff", "1"]])
       .lean();
+    let listTypes = await Type.find({}).lean();
     console.log(listTariffes);
     res.render("admin", {
       title: "Список тарифов",
       getListTariff: true,
+      listTypes: listTypes,
       listTariffes: listTariffes,
       helpers: {
         //getSrcPosterService: Helpers.getSrcPosterService,
@@ -668,7 +696,9 @@ export default {
     let nameTariff = req.body.nameTariff;
     let priceTariff = Number(req.body.priceTariff);
     let lessonsTariff = Number(req.body.lessonsTariff);
+    let typeServiceTariff = req.body.typeServiceTariff;
     let addTariff = new Tariff({
+      typeServiceTariff: typeServiceTariff,
       nameTariff: nameTariff,
       priceTariff: priceTariff,
       lessonsTariff: lessonsTariff,
@@ -730,18 +760,21 @@ export default {
   getFormEditTariff: async (req, res) => {
     console.log("редактируем тариф");
     console.log(req.params.id);
-    let tariff = await Tariff.findById(req.params.id).lean();
+    let listTypes = await Type.find({}).lean();
+    let tariff = await Tariff.findById(req.params.id)
+      .populate("typeServiceTariff")
+      .lean();
     console.log(tariff);
     ///////////////////////////////////////////////////////
     res.render("fetchpartial", {
       title: "Редактирование тарифа",
       getFormEditTariff: true,
+      listTypes: listTypes,
       tariff: tariff,
       getFormEditTariff: true,
-      // helpers: {
-
-      //   getWeekDay: Helpers.getWeekDay,
-      // },
+      helpers: {
+        eqIdType: Helpers.eqIdType,
+      },
       layout: "fetch",
     });
     ////////////////////////////////////////////////
@@ -750,12 +783,14 @@ export default {
     console.log("sohranyaem tariff");
     console.log(req.body);
     let idTariff = req.body.editIdTariff;
+    let typeServiceTariff = req.body.editTypeServiceTariff;
     let nameTariff = req.body.editNameTariff;
     let priceTariff = Number(req.body.editPriceTariff);
     let lessonsTariff = Number(req.body.editLessonsTariff);
     let result = await Tariff.updateOne(
       { _id: idTariff },
       {
+        typeServiceTariff: typeServiceTariff,
         nameTariff: nameTariff,
         priceTariff: priceTariff,
         lessonsTariff: lessonsTariff,
@@ -764,10 +799,107 @@ export default {
 
     console.log(result);
     if (result.modifiedCount > 0) {
-      res.json({ itog: "Ok" });
+      res.json({ code: 1 });
     }
   },
   ///////////////////
+  getListTypes: async (req, res) => {
+    console.log("Список видов услуг");
+    let listTypes = await Type.find({}).lean();
+    console.log(listTypes);
+    res.render("admin", {
+      title: "Виды услуг",
+      listTypes: listTypes,
+      getListType: true,
+      helpers: {},
+      layout: "admin",
+    });
+  },
+  addTypeService: async (req, res) => {
+    console.log("Добавляем вид услуги");
+    console.log(req.body.nameType);
+    let addType = new Type({
+      nameTypeService: req.body.nameType,
+    });
+
+    addType.save(function (err, newType) {
+      if (err) {
+        console.log(err);
+        res.status(201).json({
+          massege: "Ошибка при добавлении вида услуги",
+          code: 0,
+        });
+      } else {
+        console.log(newType);
+        res.status(200).json({
+          massege: "Вид услуги добавлен",
+          code: 1,
+        });
+      }
+    });
+  },
+  delTypeService: async (req, res) => {
+    console.log(req.params.id);
+
+    let listServices = await Service.find({
+      typeService: req.params.id,
+    }).lean(); //Выбираем услуги где typeService= удаляемому виду услуг
+    console.log(listServices);
+    for (let i = 0; i < listServices.length; i++) {
+      let id = listServices[i]._id.toString();
+      await Service.findByIdAndUpdate(id, {
+        typeService: "000000000000000000000000",
+      });
+    }
+    let listTariffes = await Tariff.find({
+      typeServiceTariff: req.params.id,
+    }).lean();
+    for (let i = 0; i < listTariffes.length; i++) {
+      let id = listTariffes[i]._id.toString();
+      await Tariff.findByIdAndUpdate(id, {
+        typeServiceTariff: "000000000000000000000000",
+      });
+      //   listTariffes[i].typeService = "";
+    }
+    ///////////////////////////////////////////////////////////////////
+    Type.deleteOne({ _id: req.params.id }, function (err, result) {
+      if (err) return console.log(err);
+      console.log(result);
+      if (result.deletedCount != 0) {
+        res.json({ massege: "Вид услуги успешно удалён!", code: 1 });
+      } else {
+        res.json({ massege: "Ошибка при удалении вида услуг!", code: 0 });
+      }
+    });
+  },
+  getFormEditTypeService: async (req, res) => {
+    console.log("форма редактирования вида услуг");
+    let typeService = await Type.findById(req.params.id).lean();
+    res.render("fetchpartial", {
+      title: "Редактирование вида сервиса",
+      typeService: typeService,
+      getFormEditTypeService: true,
+      helpers: {
+        //eqIdType: Helpers.eqIdType,
+      },
+      layout: "fetch",
+    });
+  },
+  saveChangesType: async (req, res) => {
+    console.log("сохраняем изменения вида услуг");
+    let result = await Type.updateOne(
+      { _id: req.params.id },
+      {
+        nameTypeService: req.body.nameType,
+      }
+    );
+
+    console.log(result);
+    if (result.modifiedCount > 0) {
+      res.json({ code: 1 });
+    }
+  },
+  /////////////////////////
   getListRegistration: async (req, res) => {
     if (req.session.access == 1) {
       registrationItem.deleteMany(
