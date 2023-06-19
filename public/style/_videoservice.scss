@@ -1,0 +1,32 @@
+.video-service__listitems {
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+
+
+}
+
+.list-video-service__item {
+
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid red;
+    // @include box-shadow();
+    @include br(5px);
+
+}
+
+.list-video-service__item-link {
+
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+}
+
+.list-video-service__item-name {
+    flex-grow: 1;
+    padding: 10px;
+}
+
+.btn-del-video-service {
+
+    margin: 10px;
+}

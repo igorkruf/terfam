@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>{{title}}</title>
+		 <link rel="shortcut icon" href="/favicon.ico?v9" type="image/x-icon">
+<link rel="icon" href="/favicon.ico?v9" type="image/x-icon">
+       <link rel="stylesheet" type="text/css" href="/style/style.css"/>
+       <script src="/scripts/script.js"></script>
+	</head>
+	<body class="grid">
+		<header class="header ">{{>header/headerwrap}}</header>
+		<div class="mainwrap">
+		<main class="main grid">
+			{{{body}}}
+		</main>
+		</div>
+		<footer class="footer width100 grid">
+<section class="content footer-content grid">
+	<div class="footer-content__contact grid">
+			<div class="contact__tel grid"><span>912-267-29-82</span></div>
+			<div class="contact__email grid"><span>lika.050375@gmail.com,&nbsp;&nbsp;lika.575@yandex.ru</span></div>
+			<div class="contact__adress grid"><span>г.Красноуфимск &nbsp;&nbsp;ул.Пролетарская, 89</span></div>
+		</div>
+	<div class="footer-content__logoss grid">
+		<div class="footer-content__ss grid"><a href="https://vk.com/prazdnikiidei" class="icon" target="_blank"><img src="/img/vk.png"></a><a href="https://t.me/terfam111"  target="_blank" class="icon"><img src="/img/tlg.png"></a><a href="https://chat.whatsapp.com/GAHOKmXxcGzE6DbtpljFfT" class="icon" target="_blank"><img src="/img/wp.png"></a></div>
+	<div class="footer-content__logo grid"><img src="/img/smalllogo_fon.jpg" alt="logo" width="100px" height="auto"></div>
+	
+	</div>	
+		
+		
+		
+	
+</section>
+		</footer>
+		{{!-- Главное меню(выезжающее) --}}
+		<section class="wrapmainmenu">
+<div class="mainmenu ">{{>main/mainmenu}}</div>
+		</section>
+				{{!-- модальное окно объявления --}}
+		<section class="wrapmodal grid ">
+<section class="modal grid">
+	<span id="closenews" class="modal__close"></span>
+	<div class="modal_content"></div>
+	
+	</section>
+	</section>
+	</body>
+</html>

@@ -1,0 +1,141 @@
+[{
+  "_id": {
+    "$oid": "6383430935b88450051a72a5"
+  },
+  "nameTariff": "Стоимость абонемент на 4 занятия в неделю (16 занятий в месяц) - 2800 руб. абонемент на 2 занятия в неделю (8 занятий в месяц) - 2000 руб. абонемент на 1 занятие в неделю (4 занятия в месяц) - 1300 руб. Стоимость разового посещения одного занятия - 500 руб.",
+  "priceTariff": 2800,
+  "lessonsTariff": 16,
+  "typeServiceTariff": {
+    "$oid": "63997c8166c343d050ac048c"
+  }
+},{
+  "_id": {
+    "$oid": "638c7c42ef5c48604fcf5429"
+  },
+  "nameTariff": "Стоимость абонемент на 4 занятия в неделю (16 занятий в месяц) - 2200 руб. абонемент на 2 занятия в неделю (8 занятий в месяц) - 1600 руб. абонемент на 1 занятие в неделю (4 занятия в месяц) - 1100 руб.  Стоимость разового посещения одного занятия - 350 руб.",
+  "priceTariff": 2200,
+  "lessonsTariff": 16,
+  "typeServiceTariff": {
+    "$oid": "63997c8166c343d050ac048c"
+  }
+},{
+  "_id": {
+    "$oid": "638c9b3eef5c48604fcf5486"
+  },
+  "nameTariff": "",
+  "priceTariff": 2800,
+  "lessonsTariff": 4,
+  "typeServiceTariff": {
+    "$oid": "63997c8166c343d050ac048c"
+  }
+},{
+  "_id": {
+    "$oid": "638c9c44ef5c48604fcf54ad"
+  },
+  "nameTariff": "Стоимость абонемента - 1600 рублей в месяц  Стоимость разового посещения одного занятия - 400 рублей",
+  "priceTariff": 1600,
+  "lessonsTariff": 8,
+  "typeServiceTariff": {
+    "$oid": "63997c8166c343d050ac048c"
+  }
+},{
+  "_id": {
+    "$oid": "638c9e5eef5c48604fcf5505"
+  },
+  "nameTariff": "Тариф 5",
+  "priceTariff": 1800,
+  "lessonsTariff": 8,
+  "typeServiceTariff": {
+    "$oid": "63996f715e54cbf05459b033"
+  }
+},{
+  "_id": {
+    "$oid": "638c9f26ef5c48604fcf5518"
+  },
+  "nameTariff": "Стоимость абонемент на 2 занятия в неделю (8 занятий в месяц) - 2600 рублей в месяц Стоимость разового посещения одного занятия - 450 рублей",
+  "priceTariff": 2600,
+  "lessonsTariff": 8,
+  "typeServiceTariff": {
+    "$oid": "63997c8166c343d050ac048c"
+  }
+},{
+  "_id": {
+    "$oid": "638c9ffdef5c48604fcf5528"
+  },
+  "nameTariff": "Разовое посещение - 400 рублей. Абонемент (4 занятия) - 1200 рублей в месяц.",
+  "priceTariff": 1200,
+  "lessonsTariff": 4,
+  "typeServiceTariff": {
+    "$oid": "63997c8166c343d050ac048c"
+  }
+},{
+  "_id": {
+    "$oid": "638ca136ef5c48604fcf5540"
+  },
+  "nameTariff": "Тариф 8",
+  "priceTariff": 1300,
+  "lessonsTariff": 4,
+  "typeServiceTariff": {
+    "$oid": "63996f715e54cbf05459b033"
+  }
+},{
+  "_id": {
+    "$oid": "638ca19eef5c48604fcf5551"
+  },
+  "nameTariff": "Стоимость абонемент на 4 занятия в неделю (16 занятий в месяц) - 2400 руб. абонемент на 2 занятия в неделю (8 занятий в месяц) - 1700 руб. абонемент на 1 занятие в неделю (4 занятия в месяц) - 1300 руб.  Стоимость разового посещения одного занятия - 400 руб.",
+  "priceTariff": 2400,
+  "lessonsTariff": 16,
+  "typeServiceTariff": {
+    "$oid": "63997c8166c343d050ac048c"
+  }
+},{
+  "_id": {
+    "$oid": "638ca1daef5c48604fcf555d"
+  },
+  "nameTariff": "Тариф 10",
+  "priceTariff": 1600,
+  "lessonsTariff": 4,
+  "typeServiceTariff": {
+    "$oid": "63996f715e54cbf05459b033"
+  }
+},{
+  "_id": {
+    "$oid": "638ca2adef5c48604fcf5575"
+  },
+  "nameTariff": "Тариф 11",
+  "priceTariff": 2000,
+  "lessonsTariff": 2,
+  "typeServiceTariff": {
+    "$oid": "63996f715e54cbf05459b033"
+  }
+},{
+  "_id": {
+    "$oid": "638ca2faef5c48604fcf5579"
+  },
+  "nameTariff": "Тариф 12",
+  "priceTariff": 2400,
+  "lessonsTariff": 4,
+  "typeServiceTariff": {
+    "$oid": "63996f715e54cbf05459b033"
+  }
+},{
+  "_id": {
+    "$oid": "638ca32aef5c48604fcf5582"
+  },
+  "nameTariff": "Тариф 13",
+  "priceTariff": 2200,
+  "lessonsTariff": 8,
+  "typeServiceTariff": {
+    "$oid": "63996f715e54cbf05459b033"
+  }
+},{
+  "_id": {
+    "$oid": "6395fd6978edc2b20fa8d840"
+  },
+  "nameTariff": "Тариф 14",
+  "priceTariff": 3500,
+  "lessonsTariff": 16,
+  "typeServiceTariff": {
+    "$oid": "63996f715e54cbf05459b033"
+  }
+}]

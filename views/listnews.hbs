@@ -1,0 +1,26 @@
+<section data-listnews>
+   <div class="partservices list-services-by-type__name-type grid">
+    <div class="content grid" >
+        {{titlePartMenu}}
+    </div>
+</div>
+     <div class="width100 grid">
+ <div class="content grid"> 
+    <section class="listnews grid">
+    
+ 
+    
+    {{#each listNews}}
+    <div class="listnews__item grid">
+      <img class="listnews__item-img" src="/uploads/img/news/{{this._id}}.jpg">
+    <div class="listnews__item-text">{{{this.textNew}}}</div>
+    </div>
+    {{/each}}
+   </section>
+   
+
+
+</div>
+</div>
+   
+</section>

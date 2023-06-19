@@ -1,0 +1,16 @@
+<div class="nav grid">
+<div class="nav__close grid" ><div class="nav__closebtn"><img src="/img/closewhite.png" ></div></div>
+<nav class="menu grid">
+    <div class="menu__item " data-razdel="home"><a href="/"><span class="menu__item-href">ГЛАВНАЯ</span></a></div>
+    <div class="menu__item " data-razdel="news"><a href="/news"><span class="menu__item-href">ОБЪЯВЛЕНИЯ</span></a></div>
+    {{!-- Возростные категории развивающих услуг  --}}
+    {{#each listCategory}}
+    <div class="menu__item" data-razdel="services"><span class="menu__item-innerhtml" data-idcategory="{{_id}}">{{toUpperCase nameCategory}}</span></div>
+    {{/each}}
+    
+    {{!--Все типы услуг (мастер-классы, тематические мероприятия и тд кроме образовательных услуг)  --}}
+    {{#each listTypeAdvServices}}
+    <div class="menu__item" data-razdel="services"><span class="menu__item_adv-innerhtml" data-idtypeservice="{{this._id}}">{{toUpperCase nameTypeService}}</span></div>
+    {{/each}}
+</nav>
+</div>

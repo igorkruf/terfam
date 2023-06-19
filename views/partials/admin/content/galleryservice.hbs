@@ -1,0 +1,15 @@
+<section data-galleryservice class="galleryservice grid">
+
+<div class="form form-add-in-gallery-service grid">
+    <input type="hidden" value="{{idService}}" class="id-service">
+        <input type="file" class=" form__input add-in-gallery-service" multiple>
+        <div class="form__btn form__btn-addingallery"> Добавить в галерею </div>
+</div>
+<div class="galleryservice__listitems grid">
+    {{#each galleryService}}
+    <div class="galleryservice__wrapitem"><img src="/uploads/img/services/gallery/{{../idService}}/{{.}}" alt="" width="100px" height="auto"><div class="del__gallerryitem"></div></div>
+    
+    {{/each}}
+
+</div>
+</section>

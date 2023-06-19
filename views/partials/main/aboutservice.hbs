@@ -1,0 +1,26 @@
+<section class="grid" data-aboutservice>
+    <div class="width100 grid">
+        <div class="content aboutservice grid">
+            <img class="aboutservice__poster" src="/uploads/img/services/{{idService}}.jpg">
+            <div class="aboutservice__name" style="background-color: {{selectedservice.colorService}};">{{toUpperCase
+                selectedservice.nameService}}</div>
+
+            <div class="aboutservice__about">{{{selectedservice.aboutService}}}</div>
+
+            {{>main/priceservice }}
+            <div class="aboutservice__about_bottom grid">
+                <input type="hidden" value="{{idService}}">
+                <div class="btn aboutservice__help-btn  grid"
+                    style="background-color: {{selectedservice.colorService}}; ">Задать вопрос / записаться</div>
+            </div>
+            <div class="aboutservice-additionally aboutservice-additionally-first">
+                {{>main/galleryservice}}
+            </div>
+            <div class="aboutservice-additionally">
+                {{>main/main-videoservice}}
+            </div>
+
+        </div>
+
+    </div>
+</section>

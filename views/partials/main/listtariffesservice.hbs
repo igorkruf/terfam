@@ -1,0 +1,11 @@
+<div class="name-service_modal" style='background-color: {{selectedService.colorService}}; color:#fff'>{{toUpperCase selectedService.nameService}}</div>
+<section class="list-tariffes-service_modal grid">
+{{#each arrayListTariffes}}
+<div class="list-tariffes-service-item_modal grid">
+<div >{{this.nameTariff}}</div>
+<div>{{getFormatedPrice this.priceTariff}} руб./месяц</div>
+<div>{{this.lessonsTariff}} занятий/месяц</div>
+</div>
+{{/each}}
+
+</section>

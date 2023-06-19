@@ -1,0 +1,21 @@
+<section class="form grid">
+<div class="adv_service grid">
+<div>Вид услуги:</div>
+<select class="form__input form__input_type-service ">            
+{{#each listTypes}}
+<option type="radio"  value={{_id}} >{{nameTypeService}}</option>
+{{/each}}
+</select>
+</div>
+     {{!-- Выбираем тип услуги тарифа --}}
+    {{!-- <div><input type="radio" value="1" checked  class="add-tariff-type-service"/>Для развивающих услуг</div>
+    <div><input type="radio" value="2"   class="add-tariff-type-service"/>Тематические праздники</div>
+    <div><input type="radio" value="3"   class="add-tariff-type-service"/>Мастер-классы</div> --}}
+    {{!--  --}}
+    <input type="text" class="form__input add-tariff-name" placeholder="Название тарифа (обязательно)" />
+    <input type="text" class="form__input add-tariff-price" placeholder="Стоимость например: 1000 (обязательно)" />
+    <input type="text" class="form__input add-tariff-lessons" placeholder="Колличество занятий в месяц например: 16 (по умолчанию 1) или кол-во человек на мероприятии" />
+   
+    <div class="form__btn form__btn-addtariff"> Добавить тариф</div>
+    
+</section>

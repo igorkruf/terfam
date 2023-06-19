@@ -1,0 +1,32 @@
+.wrap-price-service{
+    // border:1px solid red;
+    grid-template-columns: 200px 120px;
+    justify-content: end;
+    align-items: center;
+    justify-items: center;
+    color:#fff;
+    padding:10px 20px;
+    font-family: 'Neucha';
+    font-size: 20px;
+    .price{
+        font-size: 24px;
+    }
+    .detailPrice{
+        padding:5px 10px;
+        // border: 2px solid #fff;
+        @include br(5px);
+        cursor: pointer;
+        @include ns();
+        background-color: rgba(255, 255, 255, 0.1);
+        &:hover{
+            background-color: rgba(255, 255, 255, 0.2);
+            
+        };
+        &:active{
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+
+    }
+    margin-bottom: 50px;
+}

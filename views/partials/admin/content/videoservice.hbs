@@ -1,0 +1,31 @@
+<section data-videoservice class="videoservice grid">
+    <header class="header-modal-window">{{nameService}}</header>
+    <div class="form form-add-in-video-service grid">
+        <input type="hidden" value="{{idService}}" class="id-service">
+        <input type="text" class=" form__input form-add-in-video-service__url"
+            placeholder="URL видео * (только ссылка на youtube!!!)">
+        <input type="text" class=" form__input form-add-in-video-service__name" placeholder="Название видео *">
+
+        <div class="form__btn form-add-in-vide-service__btn"> Добавить видео </div>
+    </div>
+
+    <section class="video-service__listitems grid">
+        <div class="list-video-service__item hidden">
+            <a> <img class="list-video-service__item-link"></a>
+            <div class="list-video-service__item-name"></div>
+            <div class="form__btn btn-del-video-service"><input type="hidden" class="id-service">Удалить видео</div>
+
+        </div>
+
+        {{#each listVideoService}}
+        <div class="list-video-service__item">
+            <a href="{{this.urlVideo}}"> <img class="list-video-service__item-link"
+                    src="{{getUrlCoverVideoService this.urlVideo}}"></a>
+            <div class="list-video-service__item-name">{{this.nameVideo}}</div>
+            <div class="form__btn btn-del-video-service"><input type="hidden" value="{{this._id}}"
+                    class="id-service">Удалить видео</div>
+
+        </div>
+
+        {{/each}}
+    </section>

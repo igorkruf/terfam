@@ -1,0 +1,37 @@
+<section data-listtariffesadmin>
+<h1>Форма добавления тарифа</h1>
+{{>admin/content/formaddtariff}}
+<div class="new-tariff"></div>
+<h1>Список тарифов</h1>
+<div class="list__item-about grid">
+    <div class="list__item-about-text">Тариф</div>
+    <div class="list__item-about-text">Тип услуги</div>
+   <div class="list__item-text">рубл</div>
+   <div class="list__item-text">занятий</div>
+    </div>
+<section class="listtariffes grid">
+{{#each listTariffes}}
+<section class="list__item grid">
+    <nav class="list__item-menu grid">
+        <div></div>
+        <div class="edit edit-tariff"><input type="hidden" class="idtariff" value={{_id}}> </div>
+        <div class="del">
+             
+            <div class="del__confirm grid">
+              <span class="del__confirm-text" >Уверен?</span>
+               <div class="del__confirm-btns grid"><span class="del__confirm-btn deltariff">Да<input type="hidden" class="idtariff" value={{_id}}></span><span class="del__confirm-btn nodeltariff">Нет</span></div> 
+            </div>
+            <input type="hidden" class="idnews" value={{_id}}>
+        </div>
+    </nav>
+<div class="list__item-about grid">
+    <div class="list__item-about-text">{{nameTariff}}</div>
+    <div class="list__item-about-text">{{typeServiceTariff.nameTypeService}}</div>
+   <div class="list__item-text">{{priceTariff}}</div>
+   <div class="list__item-text">{{lessonsTariff}} </div>
+    </div>
+    </section>
+{{/each}}
+</section> 
+
+</section>

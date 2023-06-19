@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "634914d6dd1d3dd1a3a98e68"
+  },
+  "nameCategory": "МАЛЫШАМ",
+  "ageCategory": "0-3 лет"
+},{
+  "_id": {
+    "$oid": "634914f0dd1d3dd1a3a98e6b"
+  },
+  "nameCategory": "ДОШКОЛЯТАМ",
+  "ageCategory": "3-7 лет"
+},{
+  "_id": {
+    "$oid": "63710f038166b428d72f6a22"
+  },
+  "nameCategory": "ШКОЛЬНИКАМ",
+  "ageCategory": "8-17 лет"
+},{
+  "_id": {
+    "$oid": "637111568166b428d72f6a3a"
+  },
+  "nameCategory": "ВЗРОСЛЫМ",
+  "ageCategory": "18+"
+}]

@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "648f23c9eeebb08959684875"
+  },
+  "idServiceVideo": {
+    "$oid": "6349187f037a009b5dc5d901"
+  },
+  "nameVideo": "Греф: российскую экономику невозможно перестроить, да и не нужно",
+  "urlVideo": "https://youtu.be/yypisPx2_C4"
+},{
+  "_id": {
+    "$oid": "648f23e8eeebb08959684877"
+  },
+  "idServiceVideo": {
+    "$oid": "6349187f037a009b5dc5d901"
+  },
+  "nameVideo": "Депутата КПРФ щемят за критику болтуна губернатора",
+  "urlVideo": "https://youtu.be/JVm0iflZG3c"
+},{
+  "_id": {
+    "$oid": "648f2406eeebb08959684879"
+  },
+  "idServiceVideo": {
+    "$oid": "6349187f037a009b5dc5d901"
+  },
+  "nameVideo": "Раскол элит начали признавать сами элиты",
+  "urlVideo": "https://youtu.be/U1vf53MS_s0"
+}]

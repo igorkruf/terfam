@@ -1,0 +1,65 @@
+.form-message{
+    grid-row-gap: 20px;
+}
+.form-message__variant_wtsp{
+    @include br(5px);
+    
+   
+    
+    
+}
+.form-message__variant_email{
+    @include br(5px);
+   
+    
+    grid-row-gap: 10px;
+}
+.form-message__variant_btn{
+    grid-template-columns: repeat(2, 1fr);
+    cursor: pointer;
+    
+    font-size: 20px;
+    @include ns();
+    @include box-shadow(-5px, 5px);
+    padding: 20px;
+    @include br(5px);
+
+     background-color: $verylight;
+    &:active{
+        @include box-shadow(-2px, 2px);
+    }
+}
+.form-message__input{
+    padding:15px;
+    border:1px solid $light; 
+    font-size: 16px;
+    &::placeholder{
+        color:$light;
+    }
+}
+
+.form-message__input_text{
+    padding:15px;
+    font-size: 18px;
+    @include br(5px);
+    height: 200px;
+    resize: none;
+    &:focus{
+        outline: 0;
+    }
+    border:1px solid $light;
+    &::placeholder{
+        color:$light;
+    }
+}
+.form-message__input_error{
+    border:1px solid red;
+}
+.form-message__loader{
+    width:100%;
+    height:20px;
+    background: url(/img/loader.gif) no-repeat  ;
+}
+.form-message__loader_hidden{
+    background: none ;
+}

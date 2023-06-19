@@ -1,0 +1,27 @@
+<section data-formedittariff>
+    <h1>Изменение тарифа</h1>
+<section class="form grid">
+    
+
+     <input type="hidden" class="id_tariff"  value="{{tariff._id}}">  
+     <div class="adv_service grid">
+<div>Вид услуги:</div>
+<select class="form__input edit-type-service ">
+{{#each listTypes}}
+
+{{#if (eqIdType  this._id ../tariff.typeServiceTariff._id)}}
+ <option value="{{this._id}}" selected>{{this.nameTypeService}}</option>
+ {{else}}
+ <option value="{{this._id}}" >{{this.nameTypeService}}</option>
+ {{/if}}
+ 
+{{/each}}
+</select>
+</div>
+<input type="text" class="form__input edit-tariff-name" placeholder="Название тарифа (обязательно)" value="{{tariff.nameTariff}}"/>
+ <input type="text" class="form__input edit-tariff-price" placeholder="Стоимость например: 1000 (обязательно)" value="{{tariff.priceTariff}}"/>
+ <input type="text" class="form__input edit-tariff-lessons" placeholder="Колличество занятий в месяц например: 16 (по умолчанию 1)" value="{{tariff.lessonsTariff}}"/>
+ {{!-- <input type="file" class="afishanew"  > --}}
+<div class="form__btn form__btn-edittariff">Принять изменения </div>
+</section>
+</section>

@@ -1,0 +1,44 @@
+<section class="formaddservice">
+    <h1>Форма добавления услуги</h1>
+    <div class="form grid">
+        <input type="text" class="form__input name_service" placeholder="Название услуги (обязательно)" />
+        
+        <div class="adv_service grid">
+            <div>Афиша: </div>
+        <input type="file" class=" form__input afisha_service">
+        </div>
+        <textarea id="textareaaboutservice" class="form__textarea about_service" cols="30" rows="10"></textarea>
+<div class="adv_service grid">
+<div>Вид услуги:</div>
+<select class="form__input type-service ">            
+{{#each listTypes}}
+<option  value={{_id}} >{{nameTypeService}}</option>
+{{/each}}
+</select>
+</div>
+ 
+<div class="adv_service grid">
+<div>Возростная категория:</div>
+<div class="form__input ">            
+{{#each listCategory}}
+<input type="checkbox"  class="category_service" value={{_id}} />{{nameCategory}}<br>
+{{/each}}
+</div>
+</div>
+<div class="adv_service grid">
+<div>Тарифы:</div>
+<div class="form__input ">            
+{{#each listTariffes}}
+<input type="checkbox"  class="tariff_service" value={{_id}} />{{nameTariff}} {{priceTariff}}/{{lessonsTariff}}<br>
+{{/each}}
+</div>
+</div>
+<div class="adv_service grid">
+    <div>Цвет услуги:</div>
+<input type="color"  class="form__input color_service"
+           value="#64fd49">
+</div>
+<div class="form__btn form__btn-addservice"> Добавить услугу</div>
+    </div>
+
+</section>

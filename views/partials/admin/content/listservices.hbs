@@ -1,0 +1,26 @@
+<section data-listservices>
+    <h1>Список сервисов</h1>
+    {{#each listServices}}
+    <section class="list__item grid">
+        <nav class="list__item-menu grid">
+            <div class="video-service"><input type="hidden" class="idservice" value={{_id}}></div>
+            <div class="gallery-service"><input type="hidden" class="idservice" value={{_id}}></div>
+            <div class="edit edit-service"><input type="hidden" class="idservice" value={{_id}}> </div>
+            <div class="del">
+
+                <div class="del__confirm grid">
+                    <span class="del__confirm-text">Уверен?</span>
+                    <div class="del__confirm-btns grid"><span class="del__confirm-btn " data-delservice>Да<input
+                                type="hidden" class="idservice" value={{_id}}></span><span
+                            class="del__confirm-btn nodelservice">Нет</span></div>
+                </div>
+                <input type="hidden" class="idservice" value={{_id}}>
+            </div>
+        </nav>
+
+        <div class="list__item-text">{{nameService}}</div>
+        <input type="hidden" value="{{aboutService}}">
+
+    </section>
+    {{/each}}
+</section>

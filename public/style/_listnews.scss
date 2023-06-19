@@ -1,0 +1,28 @@
+.listnews{
+    padding-top: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    div{
+         //border:1px solid red;
+    }
+}
+.listnews__item{
+    padding: 20px;
+    // background-color: #a6368133;
+    grid-template-columns: 100px 1fr;
+    grid-column-gap: 20px;
+    @include br(5px);
+    @include ns();
+    //background-color: #00000010;
+    
+}
+.listnews__item-img{
+
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    @include br(100px);
+    @include box-shadow(-5px, 5px);
+
+}

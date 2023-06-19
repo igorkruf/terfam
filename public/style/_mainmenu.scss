@@ -1,0 +1,112 @@
+.mainmenu{
+    position:absolute;
+    top:0px;
+    right:-300px;
+    width:300px;
+    height:100vh;
+    background-color: $clrheadermenu;
+    @include ns();
+       
+  }
+  .menu__item-href{
+    color:#fff;
+  }
+  .mainmenu-unvisible{
+    
+    animation: unvisible forwards .3s ease;
+
+  }
+  .mainmenu-visible{
+    
+    animation: visible forwards .3s ease;
+
+  }
+  @keyframes visible{
+    0%{
+        right:-300px;
+    }
+    100%{
+        right:0px;
+    }
+  }
+  @keyframes unvisible{
+    0%{
+        right:0px;
+    }
+    100%{
+        right:-300px;
+    }
+  }
+  .nav{
+    grid-row-gap: 20px;
+    margin-top: 20px;
+    
+    color:#fff;
+  }
+  .nav__close{
+    padding-right: 10px;
+    grid-template-columns: 50px;
+    justify-content: end;
+   
+
+
+  }
+  .nav__closebtn{
+    padding: 10px;
+    width: 50px;
+    height:50px;
+    cursor: pointer;
+    @include br(50px);
+   background-color: #ffffff1f;
+   &:hover{
+    background-color: #ffffff3a;
+  }
+  img{
+    width:100%;
+    height:auto;
+    
+  }
+
+  }
+  .menu{
+   @include ns();
+  }
+  .menu__item{
+    position: relative;
+    
+    opacity:0;
+    font-size: 20px;
+    padding:10px 30px;
+    cursor:pointer;
+    &:hover{
+      background-color: #ffffff1f;
+      
+    }
+    &:active{
+      background-color: #ffffff3a;
+    }
+    //margin:0px 10px;
+    
+  }
+  .selmenuitem{
+    cursor:default;
+    background-color: #ffffff3a;
+    &:hover{
+      background-color: #ffffff3a;
+    }
+  }
+  .menu__item_loaded{
+    animation: menuItemLoaded 1s forwards ease;
+  }
+  @keyframes menuItemLoaded{
+    0%{
+      opacity:0;
+      left:100px;
+      
+    }
+    100%{
+      opacity:1;
+      left:0px;
+    }
+  }
+  

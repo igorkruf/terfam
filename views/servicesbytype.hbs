@@ -1,0 +1,32 @@
+  <section class="grid list-services-by-type" data-listservices >
+ 
+ <div class="partservices list-services-by-type__name-type grid">
+    <div class="content grid" >
+        {{nameTypeService}}
+    </div>
+</div>
+
+<div class="width100 grid">
+ <div class="content grid">   
+<section class="listservices grid">
+ {{#each listServicesByType}}
+ 
+    <a href="/service/{{this._id}}">
+    <div class="listservices__item-wrapper">
+    <article class="listservices__item ">
+      <input type="hidden" value="{{this._id}}">
+      <div class="listsevices__item-poster" style="background: url('/uploads/img/services/{{this._id}}.jpg') center top/ cover"></div>
+      <div class="listservices__item-name grid" style="background-color:{{this.colorService}}; ">{{toUpperCase this.nameService}}</div>  
+      </article>
+      </div> 
+    </a>
+    
+    
+    {{/each}}
+</section>
+</div>
+    </div>
+ </section>
+  
+   
+

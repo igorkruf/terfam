@@ -1,0 +1,23 @@
+<h1>Список объявлений</h1>
+<section class="listnewsadmin grid">
+{{#each listNews}}
+<section class="list__item grid">
+    <nav class="list__item-menu grid">
+        <div></div>
+        <div></div>
+        {{!-- <div class="edit edit-news"><input type="hidden" class="idnews" value={{_id}}> </div> --}}
+        <div class="del">
+             
+            <div class="del__confirm grid">
+              <span class="del__confirm-text" >Уверен?</span>
+               <div class="del__confirm-btns grid"><span class="del__confirm-btn delnews">Да</span><span class="del__confirm-btn nodelnews">Нет</span></div> 
+            </div>
+            <input type="hidden" class="idnews" value={{_id}}>
+        </div>
+    </nav>
+
+    <div class="list__item-text">{{{textNew}}}</div>
+   
+    </section>
+{{/each}}
+</section>

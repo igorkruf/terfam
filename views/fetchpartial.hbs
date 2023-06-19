@@ -1,0 +1,37 @@
+{{!-- Предварительная запись --}}
+{{#if registration}}
+<section class="title-registration grid">
+    <span class="to-main-page">На главную страницу</span>
+</section>
+{{>registration/registration}}
+{{/if}}
+{{#if getRegRab}}
+{{>registration/regrab}}
+{{/if}}
+{{!-- Форма редактирования категории --}}
+{{#if getFormEditCategory}}
+{{>admin/content/formeditcategory}}
+{{/if}}
+{{#if getFormEditService}}
+{{>admin/content/formeditservice}}
+{{/if}}
+{{#if getGalleryService}}
+{{>admin/content/galleryservice}}
+{{/if}}
+{{!-- Администрирование видео услуги --}}
+{{#if getVideoService}}
+{{>admin/content/videoservice}}
+{{/if}}
+{{#if getFormEditTariff}}
+{{>admin/content/formedittariff}}
+{{/if}}
+{{!-- Массив объектов(тарифов услуги) --}}
+{{#if getListTariffesService}}
+{{>main/listtariffesservice}}
+{{/if}}
+{{#if getFormEditTypeService}}
+{{>admin/content/formedittype}}
+{{/if}}
+{{#if getFormMessage}}
+{{>main/formmessage}}
+{{/if}}

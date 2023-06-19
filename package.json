@@ -1,0 +1,37 @@
+{
+  "name": "advokats",
+  "version": "1.0.0",
+  "description": "Сайт адвокатов",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "Igor Cherepennikov",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "jsdom": "^20.0.0",
+    "luxon": "^3.0.3",
+    "md5": "^2.3.0",
+    "mongoose": "^6.5.4",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.2.10",
+    "node-telegram-bot-api": "0.59.0",
+    "nodemailer": "^6.9.0",
+    "sharp": "^0.30.7"
+  },
+  "devDependencies": {
+    "del": "^6.1.1",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sass": "^5.1.0",
+    "nodemon": "^2.0.16",
+    "sass": "^1.52.1"
+  }
+}

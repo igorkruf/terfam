@@ -1,0 +1,49 @@
+ <section class="grid" data-listservices >
+    {{#if mainPage}}
+    {{!-- Есть ли слайды --}}
+    {{#if (ifListSlides listSlides)}}
+    <div class="width100 grid ">
+          <div class="main-page-mobile-slider">
+            {{>main/mobile-slider}}
+          </div>
+            <div class="main-page-slider grid"> 
+        
+            {{>main/slider}}
+            </div>
+        
+    </div>
+    {{/if}}
+    {{/if}}
+   {{!-- {{#if listCategory}} --}}
+    {{#each listCategory}}
+
+ <div class="partservices grid">
+    <div class="partservices__content content grid" data-ageservices="{{this.ageCategory}}">
+        {{this.nameCategory}}
+    </div>
+</div>
+{{!-- {{/if}} --}}
+<div class="width100 grid">
+ <div class="content grid">   
+<section class="listservices grid">
+ {{#each this.listServices}}
+ 
+    <a href="/service/{{this._id}}">
+    <div class="listservices__item-wrapper">
+    <article class="listservices__item ">
+      <input type="hidden" value="{{this._id}}">
+      <div class="listsevices__item-poster" style="background: url('/uploads/img/services/{{this._id}}.jpg') center top/ cover"></div>
+      <div class="listservices__item-name grid" style="background-color:{{this.colorService}}; ">{{toUpperCase this.nameService}}</div>  
+      </article>
+      </div> 
+    </a>
+    
+    
+    {{/each}}
+</section>
+</div>
+    </div>
+  {{!-- {{#if listCategory}}    --}}
+{{/each}}
+{{!-- {{/if}} --}}
+ </section>

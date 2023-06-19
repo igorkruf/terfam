@@ -1,0 +1,58 @@
+<section data-formeditservice>
+    
+    <h1>Форма редактирования услуги</h1>
+    <div class="form grid">
+        <input type="hidden" data-idservice value="{{selectedService._id}}">
+        <input type="text" class="form__input " data-name-service placeholder="Название услуги (обязательно)" value="{{selectedService.nameService}}"/>
+        <div class="adv_service grid">
+            <div class="poster-service grid"><span>Афиша:</span><img src={{posterSelectedService}} width="80px" height="auto"> </div>
+        <input type="file" class="form__input" data-poster-service>
+        </div>
+        <textarea id="textareaaboutserviceedit{{selectedService._id}}" class="form__textarea" data-about-service cols="30" rows="10"></textarea>
+
+ <div class="adv_service grid">
+<div>Вид услуги:</div>
+<select class="form__input edit-type-service ">            
+{{#each listTypes}}
+
+{{#if (eqIdType  this._id ../selectedService.typeService._id)}}
+ <option value="{{this._id}}" selected>{{this.nameTypeService}}</option>
+ {{else}}
+ <option value="{{this._id}}" >{{this.nameTypeService}}</option>
+ {{/if}}
+ 
+{{/each}}
+</select>
+</div>
+
+<div class="adv_service grid">
+<div>Возростная категория:</div>
+<div class="form__input ">    
+    <input type="hidden" class="selectedCategory" value={{selectedService.categoryService}}>        
+{{#each listCategory}}
+
+<input type="checkbox"  class="category_service" data-category-service value={{_id}} />{{nameCategory}}<br>
+{{/each}}
+</div>
+</div>
+<div class="adv_service grid">
+<div>Тарифы:</div>
+<div class="form__input ">    
+    <input type="hidden" class="selectedTariff" value={{selectedService.tariffesService}}>        
+{{#each listTariffes}}
+
+<input type="checkbox"  class="tariff_service" data-tariff-service value={{_id}} />{{nameTariff}} {{priceTariff}}/{{lessonsTariff}}<br>
+{{/each}}
+</div>
+</div>
+<div class="adv_service grid">
+    <div>Цвет услуги:</div>
+<input type="color"  class="form__input color_service" data-color-service
+           value="{{selectedService.colorService}}">
+</div>
+<div class="form__btn" data-btn-save-service> Сохранить изменения</div>
+    </div>
+    
+
+
+</section>

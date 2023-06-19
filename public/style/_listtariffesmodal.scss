@@ -1,0 +1,20 @@
+.name-service_modal{
+    padding: 10px 20px;
+    font-family: 'Neucha';
+    font-size: 20px;
+    @include br(5px);
+    margin-bottom: 20px;
+
+}
+.list-tariffes-service-item_modal{
+    margin-top: 10px;
+    grid-template-columns: 1fr 250px 150px;
+    padding: 20px;
+    font-family: 'Neucha';
+    font-size: 18px;
+    justify-items: end;
+    align-items: center;
+    @include br(5px);
+    @include box-shadow(-5px, 5px);
+   
+}
