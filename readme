@@ -19,5 +19,5 @@ https://www.geeksforgeeks.org/how-to-enable-cors-headers-in-your-django-project/
 https://github.com/adamchainz/django-cors-headers - более сложная настройка CORS в DJANGO
 
 ________________________________________________________________________________________________________________________________________
-из QuerySet в list (елементы- словари): from django.http import JsonResponse затем data=list(listQuerySet.values()) и   return JsonResponse({"listUsers":data})
+из QuerySet в list (елементы- словари): from django.http import JsonResponse затем data=list(QuerySet.values()) и   return JsonResponse({"listUsers":data})
 ____________________________________________________________________________________________________________________________________________________________
