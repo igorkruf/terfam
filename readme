@@ -13,4 +13,5 @@ https://gist.github.com/izznogooood/207271d5b3445c508f553a0003feab13  - formData
 
 https://developer.mozilla.org/ru/docs/Learn/Server-side/Django/Forms -вечером удалить?
 https://pythonist.ru/django-optimizacziya-raboty-s-bazoj-dannyh/?ysclid=lqow9f8bxq345333486 - Интересно про queySet
+https://djangodoc.ru/3.1/ref/models/querysets/ - и это тоже querySet
 
