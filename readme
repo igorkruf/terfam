@@ -15,3 +15,5 @@ https://developer.mozilla.org/ru/docs/Learn/Server-side/Django/Forms -вечер
 https://pythonist.ru/django-optimizacziya-raboty-s-bazoj-dannyh/?ysclid=lqow9f8bxq345333486 - Интересно про queySet
 https://djangodoc.ru/3.1/ref/models/querysets/ - и это тоже querySet
 
+https://www.geeksforgeeks.org/how-to-enable-cors-headers-in-your-django-project/- проблема CORS (покрайней мере get запросы стали работать!!!)
+
