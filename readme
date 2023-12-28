@@ -17,3 +17,7 @@ https://djangodoc.ru/3.1/ref/models/querysets/ - и это тоже querySet
 
 https://www.geeksforgeeks.org/how-to-enable-cors-headers-in-your-django-project/- проблема CORS (покрайней мере get запросы стали работать!!!)
 https://github.com/adamchainz/django-cors-headers - более сложная настройка CORS в DJANGO
+
+________________________________________________________________________________________________________________________________________
+из QuerySet в list (елементы- словари): from django.http import JsonResponse затем data=list(listQuerySet.values()) и   return JsonResponse({"listUsers":data})
+____________________________________________________________________________________________________________________________________________________________
