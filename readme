@@ -21,3 +21,5 @@ https://github.com/adamchainz/django-cors-headers - более сложная н
 ________________________________________________________________________________________________________________________________________
 из QuerySet в list (елементы- словари): from django.http import JsonResponse затем data=list(QuerySet.values()) и   return JsonResponse({"listUsers":data})
 ____________________________________________________________________________________________________________________________________________________________
+
+https://habr.com/ru/articles/711954/ - scss в Django
