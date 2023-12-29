@@ -25,3 +25,5 @@ ________________________________________________________________________________
 https://habr.com/ru/articles/711954/ - scss в Django
 
 https://proproprogs.ru/django/podklyuchenie-staticheskih-faylov-filtry-shablonov
+
+https://djbook.ru/rel3.0/ref/templates/builtins.html#ref-templates-builtins-filters - фильтры вывода переменных в шаблонах
