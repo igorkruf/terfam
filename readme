@@ -35,4 +35,8 @@ https://tproger.ru/articles/principy-solid-python?ysclid=lqqwlxpio6340700304 - p
 https://questu.ru/articles/254359/?ysclid=lqv9c6b6ce980048864  - об регистрации пользователя на сайте
 https://djangodoc.ru/3.2/topics/auth/default/?ysclid=lqv94ddxyg536143048  тоже про авторизацию и аутентификацию
 https://proproprogs.ru/django4/django4-dekorator-login-required-i-klass-loginrequiredmixin?ysclid=lqv9olzwq9731332556  и ещё про авторизацию...
-
+////Это для того что бы в шаблонах django при сохранении не форматировался код- а иначе {% %} {% %} ,бутут разрываться и как итог синтаксическая ошибка/////////
+"[django-html]": {
+"editor.formatOnSave": false
+}
+///этот код добавить в settingf.json VScode
