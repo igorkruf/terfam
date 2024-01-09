@@ -45,6 +45,7 @@ https://www.geeksforgeeks.org/top-django-packages/   10 самых необхо�
 
 https://docs.djangoproject.com/en/4.2/ref/models/fields/   - свойства полей модели
 https://djangodoc.ru/3.2/ref/models/querysets/#field-lookups - filtrация набора QuerySet:  QuerySet.filter(...)
+https://proproprogs.ru/django4/django4-rasshirenie-modeli-user-klass-abstractuser?ysclid=lr5z5wyqwz741216575  - расширение стандартной модели пользователя!!!
 
 https://youtu.be/M2XZqlX7ao4?si=E0DtMCKHfb0FYEAL  - курс по django
 
