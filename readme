@@ -58,12 +58,12 @@ https://design-hero.ru/articles/6787/ -websockets в django
 
 https://habr.com/ru/articles/568198/  - про представления га классах
 https://www.npmjs.com/package/js-datepicker#examples   datepicker
+
+//FORM-SET//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 https://evileg.com/ru/post/455/  - пример formSet
-
 https://www.letscodemore.com/blog/django-inline-formset-factory-with-examples/ -ещё один пример formset про фотогаллерею к продукту
-
+https://django.fun/docs/django/5.0/topics/forms/formsets/ - интересно про формсет
 https://ccbv.co.uk/  - представления на основе классов
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Set up GitHub Copilot
 
