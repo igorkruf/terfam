@@ -1,6 +1,8 @@
 versiya NODE v16.14.0
 file .env в mail облаке в папке /projects/terfam
 
+https://django.fun/docs/django/5.0/ - документация django на русском
+
 https://proghunter.ru/articles/django-base-2023-installing-postgresql-in-django     - подключаем базу postgresql к django
 https://metanit.com/sql/postgresql/ -postgresql
 https://metanit.com/python/django/ - django
