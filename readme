@@ -1,3 +1,8 @@
+ssh pub key: 
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFc0McoWl0dDTCV98J25qh54gt5FoIPiYprOWYazKzGA igor.kruf@gmail.com
+инструкция как установить: https://best-manual.ru/blog/diy/2022-11-21-nastrojka-dostupa-po-ssh-klyuchu-v-github-v-windows-i-macos.html
+
+
 versiya NODE v16.14.0
 file .env в mail облаке в папке /projects/terfam
 
